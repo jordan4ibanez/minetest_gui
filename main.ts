@@ -1,8 +1,23 @@
-export function add(a: number, b: number): number {
-  return a + b;
+import { Webview } from "@webview/webview";
+
+export const print = console.log;
+
+const html = `
+  <html>
+  <body>
+    <h1>Hello from deno v${Deno.version.deno}</h1>
+    <marquee>hi</marquee>
+  </body>
+  </html>
+`;
+
+
+
+if (import.meta.main) {
+  const webview = new Webview();
+  webview.navigate(`data:text/html,${encodeURIComponent(html)}`);
+  webview.run();
 }
 
-// Learn more at https://deno.land/manual/examples/module_metadata#concepts
-if (import.meta.main) {
-  console.log("Add 2 + 3 =", add(2, 3));
-}
+
+
