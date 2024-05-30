@@ -1,8 +1,9 @@
 {
-  "deno.enable": true,
   "typescript.format.semicolons": "insert",
   "cSpell.words": [
     "Deno",
-    "minetest"
+    "logulate",
+    "minetest",
+    "tauri"
   ],
 }

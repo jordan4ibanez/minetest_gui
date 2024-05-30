@@ -1,6 +1,5 @@
 # minetest_gui
- A gui for minetest. Uses deno and typescript.
+ A gui for minetest. Uses tauri and typescript.
 
 Requires:
-- [Deno](https://deno.com/)
-- [webkit2gtk](https://webkitgtk.org/)
+- [webkit2gtk 4.1](https://webkitgtk.org/)

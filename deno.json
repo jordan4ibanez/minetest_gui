@@ -1,8 +1,0 @@
-{
-  "tasks": {
-    "dev": "deno run --watch --allow-env --unstable-ffi --allow-read --allow-write --allow-net --allow-ffi main.ts"
-  },
-  "imports": {
-    "@webview/webview": "jsr:@webview/webview@^0.8.0"
-  }
-}
