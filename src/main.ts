@@ -7,24 +7,24 @@ import { emit, listen } from '@tauri-apps/api/event';
 
 const detach = await attachConsole();
 
-let greetInputEl: HTMLInputElement | null;
-let greetMsgEl: HTMLElement | null;
+// let greetInputEl: HTMLInputElement | null;
+// let greetMsgEl: HTMLElement | null;
 
-async function greet() {
-  if (greetMsgEl && greetInputEl) {
-    // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
-    greetMsgEl.textContent = await invoke("greet", {
-      name: greetInputEl.value,
-    });
+// async function greet() {
+//   if (greetMsgEl && greetInputEl) {
+//     // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
+//     greetMsgEl.textContent = await invoke("greet", {
+//       name: greetInputEl.value,
+//     });
 
-    info("hi");
+//     info("hi");
 
-    console.log("hi");
-    trace("Trace");
-    info("Info");
-    error("Error");
-  }
-}
+//     console.log("hi");
+//     trace("Trace");
+//     info("Info");
+//     error("Error");
+//   }
+// }
 
 // window.addEventListener("DOMContentLoaded", () => {
 //   greetInputEl = document.querySelector("#greet-input");
