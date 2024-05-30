@@ -2,6 +2,7 @@
   "typescript.format.semicolons": "insert",
   "cSpell.words": [
     "Deno",
+    "librsvg",
     "logulate",
     "minetest",
     "tauri"
