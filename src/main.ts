@@ -2,6 +2,10 @@ import { app, shell, tauri } from "@tauri-apps/api";
 import { invokeTauriCommand } from "@tauri-apps/api/helpers/tauri";
 import { Command } from "@tauri-apps/api/shell";
 import { invoke } from "@tauri-apps/api/tauri";
+import { trace, info, error, attachConsole } from "tauri-plugin-log-api";
+import { emit, listen } from '@tauri-apps/api/event';
+
+const detach = await attachConsole();
 
 let greetInputEl: HTMLInputElement | null;
 let greetMsgEl: HTMLElement | null;
@@ -12,22 +16,42 @@ async function greet() {
     greetMsgEl.textContent = await invoke("greet", {
       name: greetInputEl.value,
     });
+
+    info("hi");
+
+    console.log("hi");
+    trace("Trace");
+    info("Info");
+    error("Error");
   }
 }
 
-window.addEventListener("DOMContentLoaded", () => {
-  greetInputEl = document.querySelector("#greet-input");
-  greetMsgEl = document.querySelector("#greet-msg");
-  document.querySelector("#greet-form")?.addEventListener("submit", (e) => {
-    e.preventDefault();
-    greet();
-  });
+// window.addEventListener("DOMContentLoaded", () => {
+//   greetInputEl = document.querySelector("#greet-input");
+//   greetMsgEl = document.querySelector("#greet-msg");
+//   document.querySelector("#greet-form")?.addEventListener("submit", (e) => {
+//     e.preventDefault();
+//     greet();
+//   });
+
+// });
+
+
+window.addEventListener("click", (test: any) => {
+  info(test);
 });
 
-let x = document.getElementById("#cool");
+document.addEventListener("click", () => {
+  info("click");
+});
 
-app.getTauriVersion();
 
-invoke("println", {});
+// info("hi");
 
-tauri.invoke("echo hi");
+// console.log("hi");
+// trace("Trace");
+// info("Info");
+// error("Error");
+
+
+detach();
