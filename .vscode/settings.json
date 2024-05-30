@@ -2,12 +2,9 @@
   "typescript.format.semicolons": "insert",
   "cSpell.words": [
     "Deno",
-<<<<<<< Updated upstream
     "librsvg",
-=======
     "Fullscreen",
     "icns",
->>>>>>> Stashed changes
     "logulate",
     "Maximizable",
     "minetest",
