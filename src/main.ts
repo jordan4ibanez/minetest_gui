@@ -1,3 +1,6 @@
+import { app, shell, tauri } from "@tauri-apps/api";
+import { invokeTauriCommand } from "@tauri-apps/api/helpers/tauri";
+import { Command } from "@tauri-apps/api/shell";
 import { invoke } from "@tauri-apps/api/tauri";
 
 let greetInputEl: HTMLInputElement | null;
@@ -20,3 +23,11 @@ window.addEventListener("DOMContentLoaded", () => {
     greet();
   });
 });
+
+let x = document.getElementById("#cool");
+
+app.getTauriVersion();
+
+invoke("println", {});
+
+tauri.invoke("echo hi");
