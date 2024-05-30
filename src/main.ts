@@ -5,6 +5,7 @@ import { invoke } from "@tauri-apps/api/tauri";
 import { trace, info, error, attachConsole } from "tauri-plugin-log-api";
 import { emit, listen } from '@tauri-apps/api/event';
 
+
 const detach = await attachConsole();
 
 // let greetInputEl: HTMLInputElement | null;
@@ -37,13 +38,23 @@ const detach = await attachConsole();
 // });
 
 
-window.addEventListener("click", (test: any) => {
-  info(test);
-});
+// window.addEventListener("click", (test: any) => {
+//   info(test);
+// });
 
-document.addEventListener("click", () => {
-  info("click");
-});
+// document.addEventListener("click", () => {
+//   info("click");
+// });
+
+const button: HTMLElement | null = document.getElementById("cool");
+
+if (button != null) {
+  button.addEventListener("click", () => {
+    info("hi");
+  });
+} else {
+  error("Button is null!");
+}
 
 
 // info("hi");
