@@ -4,20 +4,13 @@
 // import { invoke } from "@tauri-apps/api/tauri";
 import { trace, info, error, attachConsole } from "tauri-plugin-log-api";
 // import { emit, listen } from '@tauri-apps/api/event';
-import { buttonClickEvent, selectTab, Tabs } from "./library/buttonify";
+import { buttonClickEvent, selectTab, tabify, Tabs } from "./library/buttonify";
 
 // const random = Math.random;
 const detach = await attachConsole();
 
 // Neaten this up. :)
-for (const tab of Object.keys(Tabs)) {
-  if (typeof Tabs[tab as unknown as Tabs] !== "string") {
-    const id = tab.toString();
-    buttonClickEvent(id, () => {
-      selectTab(id);
-    });
-  }
-}
+tabify();
 
 // The main loop which runs every 0.05 seconds.
 function onStep(): void {

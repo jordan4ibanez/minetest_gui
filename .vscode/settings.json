@@ -12,6 +12,7 @@
     "minetest",
     "Minimizable",
     "tabcontent",
+    "tabify",
     "tablinks",
     "tauri",
     "unmaximize",
