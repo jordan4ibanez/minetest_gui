@@ -1,4 +1,4 @@
-import { error } from "tauri-plugin-log-api";
+import { error, info } from "tauri-plugin-log-api";
 
 export { };
 
@@ -21,6 +21,15 @@ export enum Tabs {
 export function stringifyTab(tab: Tabs): string {
   return Tabs[tab].toString();
 }
+
+/**
+ * Use a logger to terminal without annoying workarounds in Tauri.
+ * @param input Literally anything.
+ */
+export function printf(...input: any[]): void {
+  info(input.join(" "));
+}
+
 
 /**
  * Safely get an element by it's ID. It'll just crash if it doesn't exist.

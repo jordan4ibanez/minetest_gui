@@ -4,12 +4,12 @@
 // import { invoke } from "@tauri-apps/api/tauri";
 import { info, attachConsole } from "tauri-plugin-log-api";
 // import { emit, listen } from '@tauri-apps/api/event';
-import { tabify, Tabs } from "./library/buttonify";
+import { printf, safeGetElementByID, tabify, Tabs } from "./library/buttonify";
 
 // const random = Math.random;
 const detach = await attachConsole();
 
-// Neaten this up. :)
+// Deploy the tabs.
 tabify(Tabs.environment);
 
 // The main loop which runs every 0.05 seconds.
@@ -20,6 +20,9 @@ function onStep(): void {
 window.addEventListener("resize", () => {
   info("resized!");
 
+  let div = safeGetElementByID("environmentcontent");
+
+  printf("offsetHeight", div.offsetHeight);
 
 });
 
