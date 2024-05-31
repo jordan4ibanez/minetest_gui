@@ -44,12 +44,7 @@ export function safeGetElementByID(id: string): HTMLElement {
  * @param fun What this does when clicked.
  */
 export function buttonClickEvent(buttonID: string, fun: () => void): void {
-  const button: HTMLElement | null = document.getElementById(buttonID);
-  if (button != null) {
-    button.addEventListener("click", fun);
-  } else {
-    error(`Button ${buttonID} is null! Failed to attach button click event.`);
-  }
+  safeGetElementByID(buttonID).addEventListener("click", fun);
 }
 
 /**
