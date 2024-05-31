@@ -1,4 +1,4 @@
-import { error, info } from "tauri-plugin-log-api";
+import { error } from "tauri-plugin-log-api";
 
 export { };
 

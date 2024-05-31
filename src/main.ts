@@ -2,9 +2,9 @@
 // import { invokeTauriCommand } from "@tauri-apps/api/helpers/tauri";
 // import { Command } from "@tauri-apps/api/shell";
 // import { invoke } from "@tauri-apps/api/tauri";
-import { trace, info, error, attachConsole } from "tauri-plugin-log-api";
+import { info, attachConsole } from "tauri-plugin-log-api";
 // import { emit, listen } from '@tauri-apps/api/event';
-import { buttonClickEvent, selectTab, tabify, Tabs } from "./library/buttonify";
+import { tabify, Tabs } from "./library/buttonify";
 
 // const random = Math.random;
 const detach = await attachConsole();
@@ -20,7 +20,7 @@ function onStep(): void {
 window.addEventListener("resize", () => {
   info("resized!");
 
-  
+
 });
 
 // let test = document.getElementById("environmentcontent");
