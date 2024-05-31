@@ -23,17 +23,22 @@ export function stringifyTab(tab: Tabs): string {
 }
 
 /**
- * "Safely" get an element by it's ID. It'll just crash if it doesn't exist.
+ * Safely get an element by it's ID. It'll just crash if it doesn't exist.
  * @param id The ID of the element.
  * @returns The element.
  */
-export function safeGetElementByID(id: string): HTMLElement {
+export function safeGetElementByID(id: string, info?: string): HTMLElement {
   const element: HTMLElement | null = document.getElementById(id);
   if (element != null) {
     return element;
   } else {
-    error(`Element [${id}] is null! Failed to get safely the element by ID.`);
-    throw new Error(`Element [${id}] is null! Failed to get safely the element by ID.`);
+    if (info != null) {
+      error(info);
+      throw new Error(info);
+    } else {
+      error(`Element [${id}] is null! Failed to get safely the element by ID.`);
+      throw new Error(`Element [${id}] is null! Failed to get safely the element by ID.`);
+    }
   }
 }
 
