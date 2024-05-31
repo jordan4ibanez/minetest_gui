@@ -16,6 +16,7 @@
     "Minimizable",
     "tabcontent",
     "tabify",
+    "tablink",
     "tablinks",
     "tauri",
     "unmaximize",

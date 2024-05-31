@@ -43,7 +43,6 @@ export function safeGetElementByID(id: string, info?: string): HTMLElement {
   }
 }
 
-
 /**
  * Easy way to register button onclick events.
  * @param buttonID The ID of the button.
@@ -55,26 +54,34 @@ export function buttonClickEvent(buttonID: string, fun: () => void): void {
 }
 
 /**
+ * Shorthand for iterating class elements.
+ * @param className The class name.
+ * @param fun What to do with each element.
+ */
+export function iterElementsByClassName(className: string, fun: (element: Element, index?: number) => void) {
+  let id = 0;
+  for (let element of document.getElementsByClassName(className)) {
+    fun(element, id);
+    id++;
+  }
+}
+
+/**
  * Select a tab to focus on.
  * @param tabID The name of the tab.
  * @returns nothing
  */
 export function selectTab(tabID: string): void {
-  let tabcontent = document.getElementsByClassName("tabcontent");
-  for (let i = 0; i < tabcontent.length; i++) {
-    let element: HTMLElement = tabcontent[i] as HTMLElement;
-    element.style.display = "none";
-  }
-  let tablinks = document.getElementsByClassName("tablinks");
-  for (let i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-  }
-  let currentTab = document.getElementById(tabID);
-  if (currentTab == null) {
-    error(`Tried to select tab ${tabID} which doesn't exist!`);
-    return;
-  }
-  currentTab.className += " active";
+  iterElementsByClassName("tabcontent", (content: Element) => {
+    (content as HTMLElement).style.display = "none";
+  });
+  iterElementsByClassName("tablinks", (tablink: Element) => {
+    tablink.className = tablink.className.replace(" active", "");
+  });
+
+  safeGetElementByID(tabID, `Tried to select tab ${tabID} which doesn't exist!`)
+    .className += " active";
+
   let currentContent: HTMLElement | null = document.getElementById(tabID + "content");
   if (currentContent == null) {
     error(`Tried to select content ${tabID} which doesn't exist!`);
