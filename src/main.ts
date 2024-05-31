@@ -18,8 +18,10 @@ function onStep(): void {
 }
 
 window.addEventListener("resize", () => {
-  info("resized!")
-})
+  info("resized!");
+
+  
+});
 
 // let test = document.getElementById("environmentcontent");
 

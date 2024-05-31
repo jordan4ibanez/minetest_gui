@@ -2,6 +2,10 @@ import { error, info } from "tauri-plugin-log-api";
 
 export { };
 
+
+// I guess this framework is called buttonify now.
+
+
 /**
  * Easy enum for the 3 tabs. Makes it easy to add more.
  */
@@ -17,6 +21,8 @@ export enum Tabs {
 export function stringifyTab(tab: Tabs): string {
   return Tabs[tab].toString();
 }
+
+
 
 /**
  * Easy way to register button onclick events.
