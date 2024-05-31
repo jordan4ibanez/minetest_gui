@@ -1,16 +1,18 @@
 {
   "typescript.format.semicolons": "insert",
   "cSpell.words": [
+    "Avenir",
     "Deno",
-    "librsvg",
     "Fullscreen",
     "icns",
+    "librsvg",
     "logulate",
     "Maximizable",
     "minetest",
     "Minimizable",
     "tauri",
     "unmaximize",
-    "unminimize"
+    "unminimize",
+    "vite"
   ],
 }

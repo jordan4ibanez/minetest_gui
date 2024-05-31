@@ -11,14 +11,37 @@
 
 <body>
   <div class="container">
-    <h2>
+    <div class="tabs">
+      <button class="tablinks" id="environment">Environment</button>
+      <button class="tablinks" id="controls">Controls</button>
+      <button class="tablinks" id="settings">Settings</button>
+    </div>
+
+    <div id="environment" class="tabcontent">
+      <h3>This is the environment.</h3>
+    </div>
+
+
+    <div id="controls" class="tabcontent">
+      <h3>This is the controls.</h3>
+    </div>
+
+    <div id="settings" class="tabcontent">
+      <h3>This is the Settings.</h3>
+    </div>
+  </div>
+
+  <!-- <h2>
       <marquee behavior="alternate" direction="left" scrollamount="100">Hello</marquee>
     </h2>
 
     <div class="tab">
       <button class="tablinks" id="cool">blah</button>
-    </div>
-    <!-- <h1>Welcome to Tauri!</h1>
+    </div> -->
+
+
+
+  <!-- <h1>Welcome to Tauri!</h1>
 
       <div class="row">
         <a href="https://vitejs.dev" target="_blank">
@@ -48,7 +71,7 @@
       </form>
 
       <p id="greet-msg"></p> -->
-  </div>
+  <!-- </div> -->
 </body>
 
 </html>
