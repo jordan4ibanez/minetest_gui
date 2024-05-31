@@ -84,22 +84,29 @@ h1 {
   grid-column: 1 / 33;
   grid-row: 2 / 33;
   display: grid;
+  grid-template-columns: repeat(32, 1fr);
+  grid-template-rows: repeat(32, 1fr);
   gap: 10px;
 }
 
-#playerlabel {
-  grid-column: 1 / 2;
-  grid-row: 1 / 8;
-}
-
 #playerlist {
-  grid-column: 1 / 2;
-  grid-row: 3 / 32;
+  grid-column: 1 / 8;
+  grid-row: 1 / 33;
+  color-scheme: dark;
+  border-radius: 8px;
 }
 
 #environmenttext {
-  grid-column: 2 / 32;
-  grid-row: 1/32;
+  grid-column: 8 / 33;
+  grid-row: 1/30;
+  float: right;
+  color-scheme: dark;
+  border-radius: 8px;
+}
+
+#command-box {
+  grid-column: 8 / 33;
+  grid-row: 30/33;
   float: right;
   color-scheme: dark;
   border-radius: 8px;
