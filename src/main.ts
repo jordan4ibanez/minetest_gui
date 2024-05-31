@@ -10,7 +10,7 @@ import { buttonClickEvent, selectTab, tabify, Tabs } from "./library/buttonify";
 const detach = await attachConsole();
 
 // Neaten this up. :)
-tabify("settings");
+tabify(Tabs.environment);
 
 // The main loop which runs every 0.05 seconds.
 function onStep(): void {

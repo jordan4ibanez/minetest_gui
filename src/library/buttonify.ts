@@ -1,4 +1,4 @@
-import { error } from "tauri-plugin-log-api";
+import { error, info } from "tauri-plugin-log-api";
 
 export { };
 
@@ -7,6 +7,10 @@ export { };
  */
 export enum Tabs {
   environment, controls, settings
+}
+
+export function stringifyTab(tab: Tabs): string {
+  return Tabs[tab].toString();
 }
 
 /**
@@ -47,7 +51,7 @@ export function selectTab(tabID: string): void {
   currentContent.style.display = "";
 }
 
-export function tabify(defaultTab: string): void {
+export function tabify(defaultTab: Tabs): void {
   for (const tab of Object.keys(Tabs)) {
     if (typeof Tabs[tab as unknown as Tabs] !== "string") {
       const id = tab.toString();
@@ -57,5 +61,6 @@ export function tabify(defaultTab: string): void {
     }
   }
 
-  selectTab(defaultTab);
+  info(defaultTab.toString());
+  selectTab(stringifyTab(defaultTab));
 }
