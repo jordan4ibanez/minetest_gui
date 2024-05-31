@@ -88,12 +88,12 @@ export function selectTab(tabID: string): void {
     tablink.className = tablink.className.replace(" active", "");
   });
 
-  safeGetElementByID(tabID, `Tried to select tab ${tabID} which doesn't exist!`)
+  safeGetElementByID(tabID, `Tried to select tab [${tabID}] which doesn't exist!`)
     .className += " active";
 
   let currentContent: HTMLElement | null = document.getElementById(tabID + "content");
   if (currentContent == null) {
-    error(`Tried to select content ${tabID} which doesn't exist!`);
+    error(`Tried to select content [${tabID}] which doesn't exist!`);
     return;
   }
   currentContent.style.display = "";

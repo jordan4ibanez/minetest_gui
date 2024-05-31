@@ -18,11 +18,11 @@ function onStep(): void {
 }
 
 window.addEventListener("resize", () => {
-  info("resized!");
+  // info("resized!");
 
   let div = safeGetElementByID("environmentcontent");
 
-  printf("offsetHeight", div.offsetHeight);
+  // printf("offsetHeight", div.offsetHeight);
 
 });
 

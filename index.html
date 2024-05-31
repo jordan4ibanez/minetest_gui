@@ -11,19 +11,24 @@
 
 <body>
   <div class="container">
-    <div class="tabs">
-      <button class="tablinks" id="environment">Environment</button>
-      <button class="tablinks" id="controls">Controls</button>
-      <button class="tablinks" id="settings">Settings</button>
-    </div>
+
+    <!-- <div class="tabs"> -->
+    <button class="tablinks" id="environment">Environment</button>
+    <button class="tablinks" id="controls">Controls</button>
+    <button class="tablinks" id="settings">Settings</button>
+    <!-- </div> -->
 
     <div id="environmentcontent" class="tabcontent">
-      <h3>This is the Environment.</h3>
-      <textarea id="environmenttext"></textarea>
+      <label id="playerlabel">
+        <h3>Players</h3>
+      </label>
+      <textarea class="grid-item" id="playerlist"></textarea>
+      <textarea class="grid-item" id="environmenttext"></textarea>
 
     </div>
 
 
+    <!-- 
     <div id="controlscontent" class="tabcontent" style="display: none;">
       <h3>These are the Controls.</h3>
 
@@ -50,7 +55,7 @@
       <label for="game">Game:</label>
       <input type="text" id="game" value="forgotten_lands">
 
-    </div>
+    </div> -->
   </div>
 
   <!-- <h2>

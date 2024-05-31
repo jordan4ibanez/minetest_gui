@@ -53,16 +53,56 @@ h1 {
   text-align: center;
 }
 
-#environmentcontent {
+/*
+  main container is 32x32 grid
+*/
+.container {
   width: 100vw;
   height: 100vh;
-  float: right;
+  display: grid;
+  grid-template-columns: repeat(32, 1fr);
+  grid-template-rows: repeat(32, 1fr);
+  gap: 10px;
+}
+
+#environment {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+#controls {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+#settings {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+#environmentcontent {
+  grid-column: 1 / 33;
+  grid-row: 2 / 33;
+  display: grid;
+  gap: 10px;
+}
+
+#playerlabel {
+  grid-column: 1 / 2;
+  grid-row: 1 / 8;
+}
+
+#playerlist {
+  grid-column: 1 / 2;
+  grid-row: 3 / 32;
 }
 
 #environmenttext {
-  width: 70%;
+  grid-column: 2 / 32;
+  grid-row: 1/32;
   float: right;
-  height: 320px;
+  color-scheme: dark;
+  border-radius: 8px;
 }
 
 
@@ -110,4 +150,11 @@ button.active {
   button:active {
     background-color: #0f0f0f69;
   }
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden
 }
