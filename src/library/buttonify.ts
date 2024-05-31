@@ -1,4 +1,4 @@
-import { error } from "tauri-plugin-log-api";
+import { error, trace } from "tauri-plugin-log-api";
 
 export { };
 
@@ -32,8 +32,8 @@ export function safeGetElementByID(id: string): HTMLElement {
   if (element != null) {
     return element;
   } else {
-    error(`Button ${element} is null! Failed to attach button click event.`);
-    throw new Error(`Button ${element} is null! Failed to attach button click event.`);
+    error(`Element [${id}] is null! Failed to get safely the element by ID.`);
+    throw new Error(`Element [${id}] is null! Failed to get safely the element by ID.`);
   }
 }
 
