@@ -6,9 +6,10 @@
 
 - [webkit2gtk 4.1](https://webkitgtk.org/)
 - [librsvg2](https://en.wikipedia.org/wiki/Librsvg)
-- 
+ 
 [Follow this to set the above 2 up](https://tauri.app/v1/guides/getting-started/prerequisites/#setting-up-linux)
 
+- [git](https://git-scm.com/)
 - [nodejs](https://nodejs.org/)
 - [npm](https://www.npmjs.com/)
 - [rust](https://www.rust-lang.org/)
