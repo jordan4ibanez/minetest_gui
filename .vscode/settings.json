@@ -2,6 +2,7 @@
   "typescript.format.semicolons": "insert",
   "cSpell.words": [
     "Avenir",
+    "buttonify",
     "Deno",
     "Fullscreen",
     "icns",
