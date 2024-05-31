@@ -17,6 +17,21 @@ function onStep(): void {
 
 }
 
+window.addEventListener("resize", () => {
+  info("resized!")
+})
+
+// let test = document.getElementById("environmentcontent");
+
+// if (test != null) {
+//   info(test.namespaceURI || "");
+//   test.addEventListener("windowResize", () => {
+//     info("hi");
+//   });
+// } else {
+//   error("it's null >:(");
+// }
+
 
 
 // Internal timer runs main at 20 FPS.
