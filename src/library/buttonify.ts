@@ -2,12 +2,18 @@ import { error } from "tauri-plugin-log-api";
 
 export { };
 
-// This is totally undocumented cause I'm a lazy fuck
-
+/**
+ * Easy enum for the 3 tabs. Makes it easy to add more.
+ */
 export enum Tabs {
   environment, controls, settings
 }
 
+/**
+ * Easy way to register button onclick events.
+ * @param buttonID The ID of the button.
+ * @param fun What this does when clicked.
+ */
 export function buttonClickEvent(buttonID: string, fun: () => void): void {
   const button: HTMLElement | null = document.getElementById(buttonID);
   if (button != null) {
@@ -27,32 +33,21 @@ export function selectTab(tabID: string): void {
   for (let i = 0; i < tablinks.length; i++) {
     tablinks[i].className = tablinks[i].className.replace(" active", "");
   }
-
-
-
   let currentTab = document.getElementById(tabID);
   if (currentTab == null) {
     error(`Tried to select tab ${tabID} which doesn't exist!`);
     return;
   }
-
   currentTab.className += " active";
-
   let currentContent: HTMLElement | null = document.getElementById(tabID + "content");
-
   if (currentContent == null) {
     error(`Tried to select content ${tabID} which doesn't exist!`);
     return;
   }
-
   currentContent.style.display = "";
-
-
-
-
 }
 
-export function tabify(): void {
+export function tabify(defaultTab: string): void {
   for (const tab of Object.keys(Tabs)) {
     if (typeof Tabs[tab as unknown as Tabs] !== "string") {
       const id = tab.toString();
@@ -61,4 +56,6 @@ export function tabify(): void {
       });
     }
   }
+
+  selectTab(defaultTab);
 }

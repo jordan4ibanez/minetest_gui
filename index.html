@@ -12,22 +12,29 @@
 <body>
   <div class="container">
     <div class="tabs">
-      <button class="tablinks active" id="environment">Environment</button>
+      <button class="tablinks" id="environment">Environment</button>
       <button class="tablinks" id="controls">Controls</button>
       <button class="tablinks" id="settings">Settings</button>
     </div>
 
-    <div id="environmentcontent" class="tabcontent">
+    <div id="environmentcontent" class="tabcontent" style="display: none;">
       <h3>This is the Environment.</h3>
     </div>
 
 
     <div id="controlscontent" class="tabcontent" style="display: none;">
-      <h3>This are the Controls.</h3>
+      <h3>These are the Controls.</h3>
     </div>
 
     <div id="settingscontent" class="tabcontent" style="display: none;">
-      <h3>This is the Settings.</h3>
+      <h3>These are the Settings.</h3>
+
+
+      <label for="ip">IP:</label>
+      <input type="text" id="ip" value="127.0.0.1">
+      <p></p>
+      <label for=" port">Port:</label>
+      <input type="text" id="port" value="30001">
     </div>
   </div>
 

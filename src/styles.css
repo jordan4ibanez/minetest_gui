@@ -76,8 +76,8 @@ button:hover {
 }
 
 button.active {
-  border-color:aliceblue;
-  background-color:#2f2f2f
+  border-color: aliceblue;
+  background-color: #2f2f2f
 }
 
 input,
