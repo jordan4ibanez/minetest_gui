@@ -9,6 +9,11 @@ export enum Tabs {
   environment, controls, settings
 }
 
+/**
+ * 
+ * @param tab The Tabs enum.
+ * @returns 
+ */
 export function stringifyTab(tab: Tabs): string {
   return Tabs[tab].toString();
 }
@@ -27,6 +32,11 @@ export function buttonClickEvent(buttonID: string, fun: () => void): void {
   }
 }
 
+/**
+ * Select a tab to focus on.
+ * @param tabID The name of the tab.
+ * @returns nothing
+ */
 export function selectTab(tabID: string): void {
   let tabcontent = document.getElementsByClassName("tabcontent");
   for (let i = 0; i < tabcontent.length; i++) {
@@ -51,6 +61,10 @@ export function selectTab(tabID: string): void {
   currentContent.style.display = "";
 }
 
+/**
+ * Automatically create an on click event for tabs to focus on that "page".
+ * @param defaultTab The default tab to select.
+ */
 export function tabify(defaultTab: Tabs): void {
   for (const tab of Object.keys(Tabs)) {
     if (typeof Tabs[tab as unknown as Tabs] !== "string") {
@@ -60,7 +74,5 @@ export function tabify(defaultTab: Tabs): void {
       });
     }
   }
-
-  info(defaultTab.toString());
   selectTab(stringifyTab(defaultTab));
 }
