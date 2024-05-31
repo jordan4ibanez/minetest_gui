@@ -22,6 +22,20 @@ export function stringifyTab(tab: Tabs): string {
   return Tabs[tab].toString();
 }
 
+/**
+ * "Safely" get an element by it's ID. It'll just crash if it doesn't exist.
+ * @param id The ID of the element.
+ * @returns The element.
+ */
+export function safeGetElementByID(id: string): HTMLElement {
+  const element: HTMLElement | null = document.getElementById(id);
+  if (element != null) {
+    return element;
+  } else {
+    error(`Button ${element} is null! Failed to attach button click event.`);
+    throw new Error(`Button ${element} is null! Failed to attach button click event.`);
+  }
+}
 
 
 /**
