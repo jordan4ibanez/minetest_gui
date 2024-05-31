@@ -1,11 +1,3 @@
-/* .logo.vite:hover {
-  filter: drop-shadow(0 0 2em #747bff);
-} */
-
-/* .logo.typescript:hover {
-  filter: drop-shadow(0 0 2em #2d79c7);
-} */
-
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
@@ -63,7 +55,7 @@ h1 {
 
 input,
 button {
-  border-radius:8px;
+  border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
   font-size: 1em;
@@ -83,18 +75,15 @@ button:hover {
   border-color: #396cd8;
 }
 
-button:active {
-  border-color: #396cd8;
-  background-color: #e8e8e8;
+button.active {
+  border-color:aliceblue;
+  background-color:#2f2f2f
 }
 
 input,
 button {
   outline: none;
-}
-
-#greet-input {
-  margin-right: 5px;
+  background-color: #24c8db;
 }
 
 @media (prefers-color-scheme: dark) {
