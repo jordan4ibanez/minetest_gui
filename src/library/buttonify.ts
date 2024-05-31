@@ -25,6 +25,7 @@ export function stringifyTab(tab: Tabs): string {
 /**
  * Safely get an element by it's ID. It'll just crash if it doesn't exist.
  * @param id The ID of the element.
+ * @param info Optionally override the error message if this fails to get the element.
  * @returns The element.
  */
 export function safeGetElementByID(id: string, info?: string): HTMLElement {
@@ -49,7 +50,6 @@ export function safeGetElementByID(id: string, info?: string): HTMLElement {
  * @param fun What this does when clicked.
  */
 export function buttonClickEvent(buttonID: string, fun: () => void): void {
-
   safeGetElementByID(buttonID, `Button ${buttonID} is null! Failed to attach button click event.`)
     .addEventListener("click", fun);
 }
