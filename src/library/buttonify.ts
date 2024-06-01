@@ -149,11 +149,7 @@ export function addPlayer(name: string): void {
 }
 
 export function removePlayer(name: string): void {
-  let playerButton = document.getElementById(`${name}-button`);
-  if (playerButton == null) {
-    return;
-  }
-  playerButton.remove();
+  document.getElementById(`${name}-button`)?.remove();
 }
 
 addPlayer("meow");
