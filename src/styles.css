@@ -1,3 +1,10 @@
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden
+}
+
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
@@ -12,22 +19,6 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
-}
-
-.container {
-  margin: 0;
-  padding-top: 0vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: 0.75s;
 }
 
 .tablinks:hover:hover {
@@ -57,8 +48,9 @@ h1 {
   main container is 32x32 grid
 */
 .container {
-  width: 100vw;
-  height: 100vh;
+  padding: 1%;
+  width: 98%;
+  height: 97%;
   display: grid;
   grid-template-columns: repeat(32, 1fr);
   grid-template-rows: repeat(32, 1fr);
@@ -184,11 +176,4 @@ button.active {
   button:active {
     background-color: #0f0f0f69;
   }
-}
-
-html,
-body {
-  margin: 0;
-  height: 100%;
-  overflow: hidden
 }
