@@ -138,3 +138,26 @@ export function environmentTextAppend(newText: string): void {
   let textArea = safeGetElementByID("environment-text") as HTMLTextAreaElement;
   textArea.value += `[${timeify()}] ${newText}\n`;
 };
+
+export function addPlayer(name: string): void {
+  let players: HTMLDivElement = safeGetElementByID("playerlist") as HTMLDivElement;
+  let playerButton = document.createElement("button");
+  playerButton.className = "playerbuttons";
+  playerButton.id = `${name}-button`;
+  playerButton.innerText = name;
+  players.appendChild(playerButton);
+}
+
+export function removePlayer(name: string): void {
+  let playerButton = document.getElementById(`${name}-button`);
+  if (playerButton == null) {
+    return;
+  }
+  playerButton.remove();
+}
+
+addPlayer("meow");
+removePlayer("jordan4ibanez");
+addPlayer("jordan4ibanez");
+addPlayer("fred");
+addPlayer("smonker");
