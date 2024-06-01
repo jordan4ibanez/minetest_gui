@@ -123,27 +123,10 @@ export function tabify(defaultTab: Tabs): void {
  */
 export function timeify(): string {
   const date = new Date();
-  const hour: number = date.getHours();
-  const minute: number = date.getMinutes();
-  const second: number = date.getSeconds();
   let accumulator: string = "";
-  if (hour < 10) {
-    accumulator += `0${hour}`;
-  } else {
-    accumulator += hour;
-  }
-  accumulator += ":";
-  if (minute < 10) {
-    accumulator += `0${minute}`;
-  } else {
-    accumulator += minute;
-  }
-  accumulator += ":";
-  if (second < 10) {
-    accumulator += `0${second}`;
-  } else {
-    accumulator += second;
-  }
+  [date.getHours(), date.getMinutes(), date.getSeconds()].forEach((v, k) => {
+    accumulator += (v < 10 ? `0${v}` : v) + (k == 2 ? "" : ":");
+  });
   return accumulator;
 }
 
