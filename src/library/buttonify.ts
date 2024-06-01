@@ -117,6 +117,41 @@ export function tabify(defaultTab: Tabs): void {
   selectTab(stringifyTab(defaultTab));
 }
 
-export function environmentTextAppend(newText: string): void {
-  safeGetElementByID("environmenttext")
+/**
+ * Get the current time in HH:MM:SS format.
+ * @returns Time in HH:MM:SS format.
+ */
+export function timeify(): string {
+  const date = new Date();
+  const hour: number = date.getHours();
+  const minute: number = date.getMinutes();
+  const second: number = date.getSeconds();
+  let accumulator: string = "";
+  if (hour < 10) {
+    accumulator += `0${hour}`;
+  } else {
+    accumulator += hour;
+  }
+  accumulator += ":";
+  if (minute < 10) {
+    accumulator += `0${minute}`;
+  } else {
+    accumulator += minute;
+  }
+  accumulator += ":";
+  if (second < 10) {
+    accumulator += `0${second}`;
+  } else {
+    accumulator += second;
+  }
+  return accumulator;
 }
+
+/**
+ * Append text to the environmental text log box thing.
+ * @param newText The new text to append.
+ */
+export function environmentTextAppend(newText: string): void {
+  let textArea = safeGetElementByID("environment-text") as HTMLTextAreaElement;
+  textArea.value += `[${timeify()}] ${newText}\n`;
+};
