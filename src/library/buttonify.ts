@@ -161,8 +161,44 @@ function removePlayerButton(name: string): void {
   document.getElementById(`${name}-button`)?.remove();
 }
 
-addPlayerButton("meow");
-removePlayerButton("jordan4ibanez");
-addPlayerButton("jordan4ibanez");
-addPlayerButton("fred");
-addPlayerButton("smonker");
+/**
+ * Refresh the player buttons so the server manager can see what's going on.
+ */
+function refreshPlayerButtons(): void {
+  // We want this list to sort alphabetically every time this updates.
+  players.sort((a, b) => a.localeCompare(b));
+  players.forEach((player: string) => {
+    removePlayerButton(player);
+  });
+  players.forEach((player: string) => {
+    addPlayerButton(player);
+  });
+}
+
+/**
+ * Add a player to the gui environment.
+ * @param name The player name.
+ */
+export function addPlayer(name: string): void {
+  players.push(name);
+  refreshPlayerButtons();
+}
+
+/**
+ * Remove a player from the gui environment.
+ * @param name The player name.
+ */
+export function removePlayer(name: string): void {
+
+}
+
+
+
+addPlayer("meow");
+addPlayer("jordan4ibanez");
+addPlayer("fred");
+addPlayer("smonker");
+addPlayer("alberto");
+addPlayer("1co2o3l");
+addPlayer("demonslayer44");
+addPlayer("99bottles");
