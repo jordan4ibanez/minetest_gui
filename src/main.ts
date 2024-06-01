@@ -4,7 +4,7 @@
 // import { invoke } from "@tauri-apps/api/tauri";
 import { info, attachConsole } from "tauri-plugin-log-api";
 // import { emit, listen } from '@tauri-apps/api/event';
-import { printf, safeGetElementByID, tabify, Tabs } from "./library/buttonify";
+import { environmentTextAppend, printf, safeGetElementByID, tabify, Tabs } from "./library/buttonify";
 
 // const random = Math.random;
 const detach = await attachConsole();
@@ -18,10 +18,12 @@ safeGetElementByID("command-box").addEventListener("keypress", (event: KeyboardE
 
     // Poll info.
     const element = safeGetElementByID("command-box") as HTMLInputElement;
-    const currentCommand = element.value;
+    const currentCommand = element.value.trim();
 
     // Here would be a send to server event.
     info(currentCommand);
+    // todo: remove this placeholder.
+    environmentTextAppend(currentCommand);
 
     // Then clear it.
     element.value = "";

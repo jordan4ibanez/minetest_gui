@@ -118,7 +118,7 @@ h1 {
   width: 100%;
 }
 
-#environmenttext {
+#environment-text {
   grid-column: 8 / 33;
   grid-row: 1/30;
   float: right;
