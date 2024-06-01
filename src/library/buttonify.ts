@@ -116,3 +116,7 @@ export function tabify(defaultTab: Tabs): void {
   }
   selectTab(stringifyTab(defaultTab));
 }
+
+export function environmentTextAppend(newText: string): void {
+  safeGetElementByID("environmenttext")
+}
