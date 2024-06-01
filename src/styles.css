@@ -75,8 +75,13 @@ h1 {
   grid-row: 1;
 }
 
-#settings {
+#health {
   grid-column: 3;
+  grid-row: 1;
+}
+
+#settings {
+  grid-column: 4;
   grid-row: 1;
 }
 

@@ -10,7 +10,7 @@ export { };
  * Easy enum for the 3 tabs. Makes it easy to add more.
  */
 export enum Tabs {
-  environment, controls, settings
+  environment, controls, health, settings
 }
 
 /**
