@@ -189,16 +189,36 @@ export function addPlayer(name: string): void {
  * @param name The player name.
  */
 export function removePlayer(name: string): void {
-
+  const index = players.indexOf(name, 0);
+  if (index > -1) {
+    players.splice(index, 1);
+  } else {
+    error(`Tried to remove player [${name}] which doesn't exit in the environment.`);
+    throw new Error(`Tried to remove player [${name}] which doesn't exit in the environment.`);
+  }
+  removePlayerButton(name);
+  refreshPlayerButtons();
 }
 
 
 
-addPlayer("meow");
-addPlayer("jordan4ibanez");
-addPlayer("fred");
-addPlayer("smonker");
-addPlayer("alberto");
-addPlayer("1co2o3l");
-addPlayer("demonslayer44");
-addPlayer("99bottles");
+// addPlayer("meow");
+// addPlayer("bob");
+// // removePlayer("bob");
+// addPlayer("jordan4ibanez");
+// addPlayer("fred");
+// addPlayer("smonker");
+// addPlayer("alberto");
+// addPlayer("1co2o3l");
+// addPlayer("demonslayer44");
+// addPlayer("99bottles");
+// // removePlayer("meow");
+
+// // You can't work on an array as it's mutated. :P
+// const myClonedArray: string[] = [];
+// players.forEach((player: string) => {
+//   myClonedArray.push(player);
+// });
+// for (const player of myClonedArray) {
+//   removePlayer(player);
+// }
