@@ -5,6 +5,7 @@ export { };
 
 // I guess this framework is called buttonify now.
 
+let players: string[] = [];
 
 /**
  * Easy enum for the 3 tabs. Makes it easy to add more.
