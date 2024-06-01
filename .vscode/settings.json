@@ -15,6 +15,7 @@
     "Maximizable",
     "minetest",
     "Minimizable",
+    "playerbuttons",
     "playerlabel",
     "playerlist",
     "tabcontent",

@@ -94,6 +94,24 @@ h1 {
   grid-row: 1 / 33;
   color-scheme: dark;
   border-radius: 8px;
+  overflow-y: auto;
+
+  border: 1px solid white;
+  background-color: #1e1e1e;
+  color: white;
+  /* border-color: white; */
+
+  display: block;
+  padding: 2px;
+  text-decoration: none;
+}
+
+.playerbuttons {
+  color: white;
+  border: 1px solid white;
+  background-color: #0f0f0f;
+  box-sizing: border-box;
+  width: 100%;
 }
 
 #environmenttext {
@@ -102,6 +120,7 @@ h1 {
   float: right;
   color-scheme: dark;
   border-radius: 8px;
+  overflow-y: auto;
 }
 
 #command-box {
