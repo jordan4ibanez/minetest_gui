@@ -144,7 +144,7 @@ export function environmentTextAppend(newText: string): void {
  * Create a player button in the environment tab.
  * @param name The player name.
  */
-export function addPlayerButton(name: string): void {
+function addPlayerButton(name: string): void {
   let players: HTMLDivElement = safeGetElementByID("playerlist") as HTMLDivElement;
   let playerButton = document.createElement("button");
   playerButton.className = "playerbuttons";
@@ -157,7 +157,7 @@ export function addPlayerButton(name: string): void {
  * Remove a player button from the environment tab.
  * @param name The player name.
  */
-export function removePlayerButton(name: string): void {
+function removePlayerButton(name: string): void {
   document.getElementById(`${name}-button`)?.remove();
 }
 
