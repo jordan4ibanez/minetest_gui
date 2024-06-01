@@ -140,7 +140,11 @@ export function environmentTextAppend(newText: string): void {
   textArea.value += `[${timeify()}] ${newText}\n`;
 };
 
-export function addPlayer(name: string): void {
+/**
+ * Create a player button in the environment tab.
+ * @param name The player name.
+ */
+export function addPlayerButton(name: string): void {
   let players: HTMLDivElement = safeGetElementByID("playerlist") as HTMLDivElement;
   let playerButton = document.createElement("button");
   playerButton.className = "playerbuttons";
@@ -149,12 +153,16 @@ export function addPlayer(name: string): void {
   players.appendChild(playerButton);
 }
 
-export function removePlayer(name: string): void {
+/**
+ * Remove a player button from the environment tab.
+ * @param name The player name.
+ */
+export function removePlayerButton(name: string): void {
   document.getElementById(`${name}-button`)?.remove();
 }
 
-addPlayer("meow");
-removePlayer("jordan4ibanez");
-addPlayer("jordan4ibanez");
-addPlayer("fred");
-addPlayer("smonker");
+addPlayerButton("meow");
+removePlayerButton("jordan4ibanez");
+addPlayerButton("jordan4ibanez");
+addPlayerButton("fred");
+addPlayerButton("smonker");
