@@ -12,10 +12,30 @@ const detach = await attachConsole();
 // Deploy the tabs.
 tabify(Tabs.environment);
 
+// todo: this should hook into an internal api to send the command to the server.
+safeGetElementByID("command-box").addEventListener("keypress", (event: KeyboardEvent) => {
+  if (event.key == "Enter") {
+
+    // Poll info.
+    const element = safeGetElementByID("command-box") as HTMLInputElement;
+    const currentCommand = element.value;
+
+    // Here would be a send to server event.
+    info(currentCommand);
+
+    // Then clear it.
+    element.value = "";
+
+
+  }
+});
+
 // The main loop which runs every 0.05 seconds.
 function onStep(): void {
 
 }
+
+
 
 window.addEventListener("resize", () => {
   // info("resized!");
