@@ -9,7 +9,7 @@ let players: string[] = [];
  * Easy enum for the 3 tabs. Makes it easy to add more.
  */
 export enum Tabs {
-  environment, controls, health, settings
+  environment, controls, health
 }
 
 /**
