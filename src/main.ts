@@ -14,7 +14,6 @@ const detach = await attachConsole();
 tabify(Tabs["environment"]);
 
 // Deploy the settings.
-await loadSettings();
 await saveSettings();
 
 // todo: this should hook into an internal api to send the command to the server.
