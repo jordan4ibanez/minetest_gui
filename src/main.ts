@@ -25,7 +25,7 @@ safeGetElementByID("command-box").addEventListener("keypress", (event: KeyboardE
     const currentCommand = element.value.trim();
 
     // Here would be a send to server event.
-    info(currentCommand);
+    // info(currentCommand);
     // todo: remove this placeholder.
     environmentTextAppend(currentCommand);
 
