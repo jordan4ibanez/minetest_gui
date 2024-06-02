@@ -4,7 +4,7 @@
 // import { invoke } from "@tauri-apps/api/tauri";
 import { info, attachConsole } from "tauri-plugin-log-api";
 // import { emit, listen } from '@tauri-apps/api/event';
-import { environmentTextAppend, loadSettings, printf, safeGetElementByID, saveSettings, Settings, tabify, Tabs } from "./library/buttonify";
+import { loadSettings, tabify, Settings, safeGetElementByID, environmentTextAppend } from "./library";
 
 // const random = Math.random;
 const detach = await attachConsole();
