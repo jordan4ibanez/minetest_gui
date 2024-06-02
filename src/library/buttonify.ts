@@ -23,8 +23,6 @@ export function stringifyTab(tab: Tabs): string {
 
 /**
  * Use a logger to terminal without annoying workarounds in Tauri.
- * 
- *! WARNING ! THIS HAS A MEMORY LEAK ! WARNING !
  * @param input Literally anything.
  */
 export function printf(...input: any[]): void {
