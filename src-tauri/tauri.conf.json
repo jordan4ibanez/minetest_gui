@@ -32,24 +32,26 @@
         "writeText": false
       },
       "fs": {
-        "all": false,
-        "copyFile": false,
-        "createDir": false,
-        "exists": false,
-        "readDir": false,
-        "readFile": false,
-        "removeDir": false,
-        "removeFile": false,
-        "renameFile": false,
-        "scope": [],
-        "writeFile": false
+        "all": true,
+        "copyFile": true,
+        "createDir": true,
+        "exists": true,
+        "readDir": true,
+        "readFile": true,
+        "removeDir": true,
+        "removeFile": true,
+        "renameFile": true,
+        "scope": [
+          "$APPDATA"
+        ],
+        "writeFile": true
       },
       "globalShortcut": {
         "all": false
       },
       "http": {
-        "all": false,
-        "request": false,
+        "all": true,
+        "request": true,
         "scope": []
       },
       "notification": {
@@ -59,7 +61,7 @@
         "all": false
       },
       "path": {
-        "all": false
+        "all": true
       },
       "process": {
         "all": false,
