@@ -1,6 +1,8 @@
 {
   "typescript.format.semicolons": "insert",
   "cSpell.words": [
+    "APPCONFIG",
+    "APPDATA",
     "Avenir",
     "buttonify",
     "Deno",
@@ -18,6 +20,7 @@
     "playerbuttons",
     "playerlabel",
     "playerlist",
+    "settingify",
     "tabcontent",
     "tabify",
     "tablink",
