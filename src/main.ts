@@ -5,12 +5,16 @@
 import { info, attachConsole } from "tauri-plugin-log-api";
 // import { emit, listen } from '@tauri-apps/api/event';
 import { environmentTextAppend, printf, safeGetElementByID, tabify, Tabs } from "./library/buttonify";
+import { testify } from "./library/settingify";
 
 // const random = Math.random;
 const detach = await attachConsole();
 
 // Deploy the tabs.
-tabify(Tabs.environment);
+tabify(Tabs["environment"]);
+
+// Deploy the settings.
+testify();
 
 // todo: this should hook into an internal api to send the command to the server.
 safeGetElementByID("command-box").addEventListener("keypress", (event: KeyboardEvent) => {
