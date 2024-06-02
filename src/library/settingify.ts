@@ -7,6 +7,7 @@ import { info } from "tauri-plugin-log-api";
 export { };
 
 const settingFileName: string = "settings.conf";
+const dirInfo = { dir: BaseDirectory.AppData };
 // info(`Working in path: ${await appDataDir()}`);
 
 class Settingly {
@@ -38,8 +39,8 @@ function checkReflect(input: Object): boolean {
  */
 export async function loadSettings(): Promise<Settingly> {
   try {
-    if (await exists(settingFileName, { dir: BaseDirectory.AppData })) {
-      const text: string = await readTextFile(settingFileName, { dir: BaseDirectory.AppData });
+    if (await exists(settingFileName, dirInfo)) {
+      const text: string = await readTextFile(settingFileName, dirInfo);
       const thing: Object = JSON.parse(text,) as Settingly;
       if (checkReflect(thing)) {
         // info("that's a thing :)");
@@ -63,7 +64,7 @@ export async function loadSettings(): Promise<Settingly> {
  */
 export async function saveSettings(): Promise<void> {
   // info("writing thing");
-  await writeTextFile(settingFileName, JSON.stringify(settings), { dir: BaseDirectory.AppData });
+  await writeTextFile(settingFileName, JSON.stringify(settings), dirInfo);
   // await exists("poop.png", { dir: "" });
   // info("done");
 }
