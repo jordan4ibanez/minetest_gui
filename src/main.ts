@@ -14,7 +14,7 @@ const detach = await attachConsole();
 tabify(Tabs["environment"]);
 
 // Deploy the settings.
-testify();
+await testify();
 
 // todo: this should hook into an internal api to send the command to the server.
 safeGetElementByID("command-box").addEventListener("keypress", (event: KeyboardEvent) => {
