@@ -1,3 +1,4 @@
+import { BaseDirectory, exists, readTextFile, writeTextFile } from "@tauri-apps/api/fs";
 import { error, info } from "tauri-plugin-log-api";
 
 export { };
@@ -112,6 +113,8 @@ export function tabify(defaultTab: Tabs): void {
       const id = tab.toString();
       buttonClickEvent(id, () => {
         selectTab(id);
+        Settings.setTab(Tabs[tab as unknown as Tabs] as unknown as Tabs);
+
       });
     }
   }
@@ -202,23 +205,80 @@ export function removePlayer(name: string): void {
 
 
 
-// addPlayer("meow");
-// addPlayer("bob");
-// // removePlayer("bob");
-// addPlayer("jordan4ibanez");
-// addPlayer("fred");
-// addPlayer("smonker");
-// addPlayer("alberto");
-// addPlayer("1co2o3l");
-// addPlayer("demonslayer44");
-// addPlayer("99bottles");
-// // removePlayer("meow");
+const settingFileName: string = "settings.conf";
+const dirInfo = { dir: BaseDirectory.AppData };
+// info(`Working in path: ${await appDataDir()}`);
 
-// // You can't work on an array as it's mutated. :P
-// const myClonedArray: string[] = [];
-// players.forEach((player: string) => {
-//   myClonedArray.push(player);
-// });
-// for (const player of myClonedArray) {
-//   removePlayer(player);
-// }
+class Settingly {
+  tab: Tabs = Tabs.environment;
+}
+
+const settings: Settingly = await loadSettings();
+
+/**
+ * Raw object used as a weird dispatcher.
+ * 
+ * This thing sacrifices disk performance to make sure it saves everything
+ * every time you do something.
+ * 
+ * Which will be really noticeable if you're using a windows xp machine.
+ */
+export const Settings = {
+  getTab(): Tabs {
+    return settings.tab;
+  },
+  setTab(tab: Tabs): void {
+    settings.tab = tab;
+    saveSettings();
+  }
+};
+
+/**
+ * Half baked attempt at reflection on a JSON object.
+ * @param input The raw JSON object.
+ * @returns If this thing is a Settingly object.
+ */
+function checkReflect(input: Object): boolean {
+  for (const [key, value] of Object.entries(new Settingly())) {
+    const valueType: string = typeof value;
+    const has = input.hasOwnProperty(key);
+    const typeMatch = typeof input[key as keyof Object] === valueType;
+    if (!has || !typeMatch) {
+      return false;
+    }
+  }
+  return true;
+}
+
+/**
+ * Load the settings from the file if it exists.
+ * @returns The Settingly object.
+ */
+export async function loadSettings(): Promise<Settingly> {
+  try {
+    if (await exists(settingFileName, dirInfo)) {
+      const text: string = await readTextFile(settingFileName, dirInfo);
+      const thing: Object = JSON.parse(text);
+      if (checkReflect(thing)) {
+        // info("that's a thing :)");
+        return thing as Settingly;
+      } else {
+        info("STOP MODIFYING THE SETTINGS FILE WITHOUT READING THE SOURCE CODE PLEASE!");
+        return new Settingly();
+      }
+    } else {
+      info("failed completely");
+      return new Settingly();
+    }
+  } catch (e: any) {
+    info(e);
+    return new Settingly();
+  }
+}
+
+/**
+ * Save the settings file.
+ */
+export async function saveSettings(): Promise<void> {
+  await writeTextFile(settingFileName, JSON.stringify(settings), dirInfo);
+}
