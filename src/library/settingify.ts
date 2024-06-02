@@ -17,6 +17,24 @@ class Settingly {
 const settings: Settingly = await loadSettings();
 
 /**
+ * Raw object used as a weird dispatcher.
+ * 
+ * This thing sacrifices disk performance to make sure it saves everything
+ * every time you do something.
+ * 
+ * Which will be really noticeable if you're using a windows xp machine.
+ */
+export const Settings = {
+  getTab(): Tabs {
+    return settings.tab;
+  },
+  setTab(tab: Tabs): void {
+    settings.tab = tab;
+    saveSettings();
+  }
+};
+
+/**
  * Half baked attempt at reflection on a JSON object.
  * @param input The raw JSON object.
  * @returns If this thing is a Settingly object.
@@ -41,7 +59,7 @@ export async function loadSettings(): Promise<Settingly> {
   try {
     if (await exists(settingFileName, dirInfo)) {
       const text: string = await readTextFile(settingFileName, dirInfo);
-      const thing: Object = JSON.parse(text,) as Settingly;
+      const thing: Object = JSON.parse(text);
       if (checkReflect(thing)) {
         // info("that's a thing :)");
         return thing as Settingly;
@@ -63,8 +81,5 @@ export async function loadSettings(): Promise<Settingly> {
  * Save the settings file.
  */
 export async function saveSettings(): Promise<void> {
-  // info("writing thing");
   await writeTextFile(settingFileName, JSON.stringify(settings), dirInfo);
-  // await exists("poop.png", { dir: "" });
-  // info("done");
 }

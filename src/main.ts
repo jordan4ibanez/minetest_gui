@@ -10,11 +10,12 @@ import { loadSettings, saveSettings } from "./library/settingify";
 // const random = Math.random;
 const detach = await attachConsole();
 
-// Deploy the tabs.
-tabify(Tabs["environment"]);
 
 // Deploy the settings.
 await saveSettings();
+
+// Deploy the tabs.
+tabify(Tabs["environment"]);
 
 // todo: this should hook into an internal api to send the command to the server.
 safeGetElementByID("command-box").addEventListener("keypress", (event: KeyboardEvent) => {
