@@ -1,21 +1,33 @@
-import { writeText } from "@tauri-apps/api/clipboard";
-import { BaseDirectory, exists, writeFile, writeTextFile } from "@tauri-apps/api/fs";
-import { appDataDir } from "@tauri-apps/api/path";
+import { BaseDirectory, exists, readTextFile, writeTextFile } from "@tauri-apps/api/fs";
+import { Tabs } from "./buttonify";
 import { info } from "tauri-plugin-log-api";
+// import { appDataDir } from "@tauri-apps/api/path";
+// import { info } from "tauri-plugin-log-api";
 
 export { };
 
-const path = await appDataDir();
+// info(`Working in path: ${await appDataDir()}`);
 
-const settingsPath = path + "settings.txt";
+class Settingly {
+  tab: Tabs = Tabs.environment;
+}
 
-const logPath = path + "log.txt";
+export async function loadSettings() {
+  if (await exists("settings.conf", { dir: BaseDirectory.AppData })) {
+    const text: string = await readTextFile("setting.conf", { dir: BaseDirectory.AppData });
+    const thing: Object = JSON.parse(text);
 
-info(settingsPath);
+    if (thing instanceof Settingly) {
+      
+    } else {
+      info("STOP MODIFYING THE SETTINGS FILE WITHOUT READING THE SOURCE CODE PLEASE!");
+    }
+  }
+}
 
-export async function testify() {
-  info("writing thing");
-  await writeTextFile("setting.conf", JSON.stringify({ dir: "hi" }), { dir: BaseDirectory.AppData });
+export async function saveSettings() {
+  // info("writing thing");
+  await writeTextFile("settings.conf", JSON.stringify({ dir: "hi" }), { dir: BaseDirectory.AppData });
   // await exists("poop.png", { dir: "" });
-  info("done");
+  // info("done");
 }
