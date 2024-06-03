@@ -180,7 +180,7 @@ h1 {
   grid-row: 5 / 6;
 }
 
-#exelabel {
+#worldlabel {
   grid-column: 1 / 2;
   grid-row: 7 / 8;
   margin-top: auto;
@@ -188,29 +188,42 @@ h1 {
   text-align: right;
 }
 
-#exe {
+#world {
   grid-column: 2 / 16;
   grid-row: 7 / 8;
 }
 
+#exelabel {
+  grid-column: 1 / 2;
+  grid-row: 9 / 10;
+  margin-top: auto;
+  margin-bottom: auto;
+  text-align: right;
+}
+
+#exe {
+  grid-column: 2 / 16;
+  grid-row: 9 / 10;
+}
+
 #findexebutton {
   grid-column: 16;
-  grid-row: 7 / 8;
+  grid-row: 9 / 10;
 }
 
 #startserverbutton {
   grid-column: 2;
-  grid-row: 9;
+  grid-row: 11;
 }
 
 #stopserverbutton {
   grid-column: 3;
-  grid-row: 9;
+  grid-row: 11;
 }
 
 #restartserverbutton {
   grid-column: 4;
-  grid-row: 9;
+  grid-row: 11;
 }
 
 .flop {
