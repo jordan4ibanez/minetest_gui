@@ -39,7 +39,6 @@ safeAddEventListenerByID("command-box", "keypress", (event: KeyboardEvent) => {
 });
 
 
-
 //? Hyper autosave.
 safeAddEventListenerByID("ip", "input", () => {
   const ipBox = safeGetElementByID("ip") as HTMLInputElement;
@@ -53,7 +52,10 @@ safeAddEventListenerByID("game", "input", () => {
   const gameBox = safeGetElementByID("game") as HTMLInputElement;
   Settings.setGame(gameBox.value);
 });
-
+safeAddEventListenerByID("world", "input", () => {
+  const worldBox = safeGetElementByID("world") as HTMLInputElement;
+  Settings.setWorld(worldBox.value);
+});
 
 // The main loop which runs every 0.05 seconds.
 function onStep(): void {

@@ -11,6 +11,8 @@ class Settingly {
   ip: string = "127.0.0.1";
   port: string = "300001";
   game: string = "minetest";
+  world: string = "world1";
+  exe: string = "";
 }
 
 const settings: Settingly = await loadSettings();
@@ -53,6 +55,22 @@ export const Settings = {
   },
   setGame(game: string): void {
     settings.game = game;
+    saveSettings();
+  },
+
+  getWorld(): string {
+    return settings.world;
+  },
+  setWorld(world: string): void {
+    settings.world = world;
+    saveSettings();
+  },
+
+  getExe(): string {
+    return settings.exe;
+  },
+  setExe(exe: string): void {
+    settings.exe = exe;
     saveSettings();
   }
 };
