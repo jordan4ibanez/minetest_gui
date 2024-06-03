@@ -8,6 +8,7 @@ const dirInfo = { dir: BaseDirectory.AppData };
 
 class Settingly {
   tab: Tabs = Tabs.environment;
+  ip: string = "";
 }
 
 const settings: Settingly = await loadSettings();
@@ -26,6 +27,14 @@ export const Settings = {
   },
   setTab(tab: Tabs): void {
     settings.tab = tab;
+    saveSettings();
+  },
+
+  getIP(): string {
+    return settings.ip;
+  },
+  setIP(ip: string): void {
+    settings.ip = ip;
     saveSettings();
   }
 };
@@ -77,5 +86,6 @@ export async function loadSettings(): Promise<Settingly> {
  * Save the settings file.
  */
 export async function saveSettings(): Promise<void> {
+  info("saved");
   await writeTextFile(settingFileName, JSON.stringify(settings), dirInfo);
 }

@@ -209,4 +209,9 @@ export function removePlayer(name: string): void {
 }
 
 
-
+/**
+ * Dump the saved settings into the controls settings thing.
+ */
+export function controllerify(): void {
+  (safeGetElementByID("ip") as HTMLInputElement).value = Settings.getIP();
+}

@@ -5,7 +5,7 @@
 import { info, attachConsole } from "tauri-plugin-log-api";
 // import { emit, listen } from '@tauri-apps/api/event';
 import { loadSettings, tabify, Settings, safeGetElementByID, environmentTextAppend } from "./library";
-import { safeAddEventListenerByID } from "./library/buttonify";
+import { controllerify, safeAddEventListenerByID } from "./library/buttonify";
 
 // const random = Math.random;
 const detach = await attachConsole();
@@ -16,6 +16,9 @@ await loadSettings();
 
 // Deploy the tabs.
 tabify(Settings.getTab());
+
+// Deploy the saved controls data.
+controllerify();
 
 // todo: this should hook into an internal api to send the command to the server.
 safeAddEventListenerByID("command-box", "keypress", (event: KeyboardEvent) => {
@@ -36,10 +39,11 @@ safeAddEventListenerByID("command-box", "keypress", (event: KeyboardEvent) => {
 });
 
 
+
 //? Hyper autosave.
 safeAddEventListenerByID("ip", "input", () => {
   const ipBox = safeGetElementByID("ip") as HTMLInputElement;
-  info(ipBox.value);
+  Settings.setIP(ipBox.value);
 });
 
 
