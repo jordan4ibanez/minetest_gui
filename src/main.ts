@@ -56,7 +56,10 @@ safeAddEventListenerByID("world", "input", () => {
   const worldBox = safeGetElementByID("world") as HTMLInputElement;
   Settings.setWorld(worldBox.value);
 });
-
+safeAddEventListenerByID("exe", "input", () => {
+  const exeBox = safeGetElementByID("exe") as HTMLInputElement;
+  Settings.setExe(exeBox.value);
+});
 // The main loop which runs every 0.05 seconds.
 function onStep(): void {
 

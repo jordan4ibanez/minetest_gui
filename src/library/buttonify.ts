@@ -206,7 +206,7 @@ export function removePlayer(name: string): void {
   }
   removePlayerButton(name);
   refreshPlayerButtons();
-  
+
 }
 
 
@@ -217,4 +217,6 @@ export function controllerify(): void {
   (safeGetElementByID("ip") as HTMLInputElement).value = Settings.getIP();
   (safeGetElementByID("port") as HTMLInputElement).value = Settings.getPort();
   (safeGetElementByID("game") as HTMLInputElement).value = Settings.getGame();
+  (safeGetElementByID("world") as HTMLInputElement).value = Settings.getWorld();
+  (safeGetElementByID("exe") as HTMLInputElement).value = Settings.getExe();
 }
