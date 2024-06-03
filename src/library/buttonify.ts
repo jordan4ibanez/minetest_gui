@@ -52,6 +52,16 @@ export function safeGetElementByID(id: string, info?: string): HTMLElement {
 }
 
 /**
+ * Safely attach an event listener to an Element by it's ID.
+ * @param id Element ID.
+ * @param eventType The event to listen for.
+ * @param fun What to do.
+ */
+export function safeAddEventListenerByID(id: string, eventType: string, fun: (j: any) => void): void {
+  safeGetElementByID(id).addEventListener(eventType, fun);
+}
+
+/**
  * Easy way to register button onclick events.
  * @param buttonID The ID of the button.
  * @param fun What this does when clicked.
@@ -109,7 +119,7 @@ export function tabify(defaultTab: Tabs): void {
       buttonClickEvent(id, () => {
         selectTab(id);
         Settings.setTab(Tabs[tab as unknown as Tabs] as unknown as Tabs);
-        info("hi");
+        // info("hi");
       });
     }
   }

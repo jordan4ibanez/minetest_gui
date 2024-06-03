@@ -5,6 +5,7 @@
 import { info, attachConsole } from "tauri-plugin-log-api";
 // import { emit, listen } from '@tauri-apps/api/event';
 import { loadSettings, tabify, Settings, safeGetElementByID, environmentTextAppend } from "./library";
+import { safeAddEventListenerByID } from "./library/buttonify";
 
 // const random = Math.random;
 const detach = await attachConsole();
@@ -17,7 +18,7 @@ await loadSettings();
 tabify(Settings.getTab());
 
 // todo: this should hook into an internal api to send the command to the server.
-safeGetElementByID("command-box").addEventListener("keypress", (event: KeyboardEvent) => {
+safeAddEventListenerByID("command-box", "keypress", (event: KeyboardEvent) => {
   if (event.key == "Enter") {
 
     // Poll info.
@@ -31,10 +32,18 @@ safeGetElementByID("command-box").addEventListener("keypress", (event: KeyboardE
 
     // Then clear it.
     element.value = "";
-
-
   }
 });
+
+
+//? Hyper autosave.
+safeAddEventListenerByID("ip", "input", () => {
+  const ipBox = safeGetElementByID("ip") as HTMLInputElement;
+  info(ipBox.value);
+});
+
+
+
 
 // The main loop which runs every 0.05 seconds.
 function onStep(): void {
