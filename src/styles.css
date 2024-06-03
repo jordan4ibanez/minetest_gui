@@ -39,194 +39,6 @@ h1 {
   text-align: center;
 }
 
-/*
-  main container is 32x32 grid
-*/
-.container {
-  padding: 1%;
-  width: 98%;
-  height: 97%;
-  display: grid;
-  grid-template-columns: repeat(32, 1fr);
-  grid-template-rows: repeat(32, 1fr);
-  gap: 10px;
-}
-
-#environment {
-  grid-column: 1;
-  grid-row: 1;
-}
-
-#controls {
-  grid-column: 2;
-  grid-row: 1;
-}
-
-#health {
-  grid-column: 3;
-  grid-row: 1;
-}
-
-#environmentcontent {
-  grid-column: 1 / 33;
-  grid-row: 2 / 33;
-  display: grid;
-  grid-template-columns: repeat(32, 1fr);
-  grid-template-rows: repeat(32, 1fr);
-  gap: 10px;
-}
-
-#playerlist {
-  grid-column: 1 / 8;
-  grid-row: 1 / 33;
-  color-scheme: dark;
-  border-radius: 8px;
-  overflow-y: auto;
-
-  border: 1px solid white;
-  background-color: #1e1e1e;
-  color: white;
-
-  display: block;
-  padding: 2px;
-  text-decoration: none;
-}
-
-.playerbuttons {
-  color: white;
-  border: 1px solid white;
-  background-color: #0f0f0f;
-  box-sizing: border-box;
-  width: 100%;
-}
-
-#environment-text {
-  grid-column: 8 / 33;
-  grid-row: 1/30;
-  float: right;
-  color-scheme: dark;
-  border-radius: 8px;
-  overflow-y: auto;
-}
-
-#command-box {
-  grid-column: 8 / 33;
-  grid-row: 30/33;
-  float: right;
-  color-scheme: dark;
-  border-radius: 8px;
-
-  border: 1px solid white;
-  background-color: #1e1e1e;
-  color: white;
-}
-
-
-#controlscontent {
-  grid-column: 1 / 33;
-  grid-row: 2 / 33;
-  display: grid;
-  grid-template-columns: repeat(32, 1fr);
-  grid-template-rows: repeat(32, 1fr);
-  gap: 10px;
-}
-
-/* #mycooltodolist {
-  grid-column: 3 / 33;
-  grid-row: 1 / 4;
-} */
-
-#iplabel {
-  grid-column: 1 / 2;
-  grid-row: 1 / 2;
-  margin-top: auto;
-  margin-bottom: auto;
-  text-align: right;
-}
-
-#ip {
-  grid-column: 2 / 16;
-  grid-row: 1 / 2;
-}
-
-#portlabel {
-  grid-column: 1 / 2;
-  grid-row: 3 / 4;
-  margin-top: auto;
-  margin-bottom: auto;
-  text-align: right;
-}
-
-#port {
-  grid-column: 2 / 16;
-  grid-row: 3 / 4;
-}
-
-#gamelabel {
-  grid-column: 1 / 2;
-  grid-row: 5 / 6;
-  margin-top: auto;
-  margin-bottom: auto;
-  text-align: right;
-}
-
-#game {
-  grid-column: 2 / 16;
-  grid-row: 5 / 6;
-}
-
-#worldlabel {
-  grid-column: 1 / 2;
-  grid-row: 7 / 8;
-  margin-top: auto;
-  margin-bottom: auto;
-  text-align: right;
-}
-
-#world {
-  grid-column: 2 / 16;
-  grid-row: 7 / 8;
-}
-
-#exelabel {
-  grid-column: 1 / 2;
-  grid-row: 9 / 10;
-  margin-top: auto;
-  margin-bottom: auto;
-  text-align: right;
-}
-
-#exe {
-  grid-column: 2 / 16;
-  grid-row: 9 / 10;
-}
-
-#findexebutton {
-  grid-column: 16;
-  grid-row: 9 / 10;
-}
-
-#startserverbutton {
-  grid-column: 2;
-  grid-row: 11;
-}
-
-#stopserverbutton {
-  grid-column: 3;
-  grid-row: 11;
-}
-
-#restartserverbutton {
-  grid-column: 4;
-  grid-row: 11;
-}
-
-.flop {
-  border: 1px solid transparent;
-  border-radius: 8px;
-  border-color: white;
-}
-
 input,
 button {
   border-radius: 8px;
@@ -271,4 +83,135 @@ button.active {
   button:active {
     background-color: #0f0f0f69;
   }
+}
+
+/* ----------------------------------- */
+
+/* tabs */
+.tabs {
+  display: inline-flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* main container is a flex container columnwise*/
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 1%;
+  width: 98%;
+  height: 100%;
+  gap: 10px;
+}
+
+#environmentcontent {
+  display: grid;
+  grid-template-rows: 90% 10%;
+  grid-template-columns: 1fr 3fr;
+  grid-template-areas:
+    "playerlist environment-text"
+    "playerlist command-box"
+  ;
+  gap: 10px;
+  padding-bottom: 3%;
+  height: 100%;
+}
+
+#playerlist {
+  grid-area: playerlist;
+  color-scheme: dark;
+  border-radius: 8px;
+  overflow-y: auto;
+
+  border: 1px solid white;
+  background-color: #1e1e1e;
+  color: white;
+
+  display: block;
+  padding: 2px;
+  text-decoration: none;
+}
+
+.playerbuttons {
+  color: white;
+  border: 1px solid white;
+  background-color: #0f0f0f;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+#environment-text {
+  grid-area: environment-text;
+  float: right;
+  color-scheme: dark;
+  border-radius: 8px;
+  overflow-y: auto;
+}
+
+#command-box {
+  grid-area: command-box;
+  float: right;
+  color-scheme: dark;
+  border-radius: 8px;
+
+  border: 1px solid white;
+  background-color: #1e1e1e;
+  color: white;
+}
+
+
+#controlscontent {
+  grid-column: 1 / 33;
+  grid-row: 2 / 33;
+  display: grid;
+  grid-template-columns: repeat(1fr, 1fr, 1fr);
+  grid-template-rows: repeat(1fr, 1fr);
+  grid-template-areas:
+    "ip ip ip"
+    "port port port"
+    "game game game"
+    "world world world"
+    "exe exe findexe"
+  ;
+  gap: 10px;
+
+  #ip,
+  #iplabel {
+    grid-area: ip;
+  }
+
+  #port,
+  #portlabel {
+    grid-area: port;
+  }
+
+  #game,
+  #gamelabel {
+    grid-area: game;
+  }
+
+  #world,
+  #worldlabel {
+    grid-area: world;
+  }
+
+  #exe,
+  #exelabel {
+    grid-area: exe;
+  }
+
+  #findexebutton {
+    grid-area: findexe;
+  }
+}
+
+/* #mycooltodolist {
+  grid-column: 3 / 33;
+  grid-row: 1 / 4;
+} */
+
+.flop {
+  border: 1px solid transparent;
+  border-radius: 8px;
+  border-color: white;
 }
