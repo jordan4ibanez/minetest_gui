@@ -193,6 +193,26 @@ h1 {
   grid-row: 7 / 8;
 }
 
+#findexebutton {
+  grid-column: 16;
+  grid-row: 7 / 8;
+}
+
+#startserverbutton {
+  grid-column: 2;
+  grid-row: 9;
+}
+
+#stopserverbutton {
+  grid-column: 3;
+  grid-row: 9;
+}
+
+#restartserverbutton {
+  grid-column: 4;
+  grid-row: 9;
+}
+
 .flop {
   border: 1px solid transparent;
   border-radius: 8px;
