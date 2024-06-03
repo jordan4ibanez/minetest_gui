@@ -45,8 +45,14 @@ safeAddEventListenerByID("ip", "input", () => {
   const ipBox = safeGetElementByID("ip") as HTMLInputElement;
   Settings.setIP(ipBox.value);
 });
-
-
+safeAddEventListenerByID("port", "input", () => {
+  const portBox = safeGetElementByID("port") as HTMLInputElement;
+  Settings.setPort(portBox.value);
+});
+safeAddEventListenerByID("game", "input", () => {
+  const gameBox = safeGetElementByID("game") as HTMLInputElement;
+  Settings.setGame(gameBox.value);
+});
 
 
 // The main loop which runs every 0.05 seconds.

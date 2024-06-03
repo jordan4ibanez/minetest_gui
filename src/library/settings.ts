@@ -8,7 +8,9 @@ const dirInfo = { dir: BaseDirectory.AppData };
 
 class Settingly {
   tab: Tabs = Tabs.environment;
-  ip: string = "";
+  ip: string = "127.0.0.1";
+  port: string = "300001";
+  game: string = "minetest";
 }
 
 const settings: Settingly = await loadSettings();
@@ -35,6 +37,22 @@ export const Settings = {
   },
   setIP(ip: string): void {
     settings.ip = ip;
+    saveSettings();
+  },
+
+  getPort(): string {
+    return settings.port;
+  },
+  setPort(port: string): void {
+    settings.port = port;
+    saveSettings();
+  },
+
+  getGame(): string {
+    return settings.game;
+  },
+  setGame(game: string): void {
+    settings.game = game;
     saveSettings();
   }
 };
