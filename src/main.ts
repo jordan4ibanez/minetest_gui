@@ -4,10 +4,10 @@
 // import { invoke } from "@tauri-apps/api/tauri";
 import { info, attachConsole, error } from "tauri-plugin-log-api";
 // import { emit, listen } from '@tauri-apps/api/event';
-import { loadSettings, tabify, Settings, safeGetElementByID, environmentTextAppend, loadCharts, controllerify, safeAddEventListenerByID, addData } from "./library";
+import { loadSettings, tabify, Settings, safeGetElementByID, environmentTextAppend, loadCharts, controllerify, safeAddEventListenerByID, addData, memoryPollLogic } from "./library";
 import { open } from "@tauri-apps/api/dialog";
 
-const random = Math.random;
+// const random = Math.random;
 const detach = await attachConsole();
 
 
@@ -64,15 +64,19 @@ safeAddEventListenerByID("exe", "input", () => {
   Settings.setExe(exeBox.value);
 });
 
-// The main loop which runs every 0.05 seconds.
-function onStep(): void {
-  addData(random() * 100);
-}
 
 safeAddEventListenerByID("findexebutton", "click", async () => {
   info("click");
   let exeThing: string | string[] | null = await open({
     multiple: false,
+    filters: [{
+      name: "minetest",
+      extensions: []
+    },
+    {
+      name: "minetestserver",
+      extensions: []
+    }]
   });
 
   if (exeThing === null || exeThing instanceof Array) {
@@ -106,6 +110,10 @@ window.addEventListener("resize", () => {
 // }
 
 
+// The main loop which runs every 0.05 seconds.
+function onStep(): void {
+  memoryPollLogic();
+}
 
 // Internal timer runs main at 20 FPS.
 setInterval(onStep, 50);
