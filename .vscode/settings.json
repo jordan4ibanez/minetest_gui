@@ -5,6 +5,7 @@
     "APPDATA",
     "Avenir",
     "buttonify",
+    "columnwise",
     "controllerify",
     "controlscontent",
     "Deno",
@@ -12,6 +13,7 @@
     "environmentlabel",
     "environmenttext",
     "exelabel",
+    "findexe",
     "findexebutton",
     "Fullscreen",
     "gamelabel",
@@ -41,6 +43,7 @@
     "timeify",
     "unmaximize",
     "unminimize",
-    "vite"
+    "vite",
+    "worldlabel"
   ],
 }

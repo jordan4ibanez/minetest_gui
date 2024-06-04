@@ -159,49 +159,79 @@ button.active {
   color: white;
 }
 
-
+/* this is truly horrible and I love it*/
 #controlscontent {
   grid-column: 1 / 33;
   grid-row: 2 / 33;
   display: grid;
-  grid-template-columns: repeat(1fr, 1fr, 1fr);
-  grid-template-rows: repeat(1fr, 1fr);
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(3, 1fr);
   grid-template-areas:
-    "ip ip ip"
-    "port port port"
-    "game game game"
-    "world world world"
-    "exe exe findexe"
+    "iplabel ip ip ip ip ip ip ip ip ip"
+    "portlabel port port port port port port port port port"
+    "gamelabel game game game game game game game game game"
+    "worldlabel world world world world world world world world world"
+    "exelabel exe exe exe exe exe exe exe exe findexe"
+    "a b c d e f g h i j"
+    "k l m n o p q r s t"
+    "0 start start 2 stop stop 3 restart restart 4"
   ;
   gap: 10px;
 
-  #ip,
   #iplabel {
+    grid-area: iplabel;
+  }
+
+  #ip {
     grid-area: ip;
   }
 
-  #port,
   #portlabel {
+    grid-area: portlabel;
+  }
+
+  #port {
     grid-area: port;
   }
 
-  #game,
   #gamelabel {
+    grid-area: gamelabel;
+  }
+
+  #game {
     grid-area: game;
   }
 
-  #world,
   #worldlabel {
+    grid-area: worldlabel;
+  }
+
+  #world {
     grid-area: world;
   }
 
-  #exe,
   #exelabel {
+    grid-area: exelabel;
+  }
+
+  #exe {
     grid-area: exe;
   }
 
   #findexebutton {
     grid-area: findexe;
+  }
+
+  #startserverbutton {
+    grid-area: start;
+  }
+
+  #stopserverbutton {
+    grid-area: stop;
+  }
+
+  #restartserverbutton {
+    grid-area: restart;
   }
 }
 
