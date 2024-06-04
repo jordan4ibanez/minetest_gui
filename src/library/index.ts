@@ -1,2 +1,3 @@
-export { Tabs, tabify, safeGetElementByID, environmentTextAppend } from "./buttonify";
+export { Tabs, tabify, safeGetElementByID, environmentTextAppend, controllerify, safeAddEventListenerByID } from "./buttonify";
 export { Settings, loadSettings } from "./settings";
+export { loadCharts } from "./chartify";
