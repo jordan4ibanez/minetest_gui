@@ -45,8 +45,8 @@ export function safeGetElementByID(id: string, info?: string): HTMLElement {
       error(info);
       throw new Error(info);
     } else {
-      error(`Element [${id}] is null! Failed to get safely the element by ID.`);
-      throw new Error(`Element [${id}] is null! Failed to get safely the element by ID.`);
+      error(`Element [${id}] is null! Failed to safely get the element by ID.`);
+      throw new Error(`Element [${id}] is null! Failed to safely get the element by ID.`);
     }
   }
 }
