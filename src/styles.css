@@ -178,6 +178,12 @@ button.active {
   ;
   gap: 10px;
 
+  .lableator {
+    margin-left: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
   #iplabel {
     grid-area: iplabel;
   }
