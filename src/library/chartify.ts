@@ -11,6 +11,8 @@ for (let i = 0; i < 30; i++) {
   timeSpan.push(i);
 }
 
+let ignore: number = 0;
+
 let memoryGraph: Chart<"line", number[], number> = new Chart(memorychartcanvas, {
   type: 'line',
   data: {
@@ -32,6 +34,13 @@ let memoryGraph: Chart<"line", number[], number> = new Chart(memorychartcanvas, 
 });
 
 export function addData(newData: number): void {
+  // This is a horrible way to improve performance :D
+  ignore++;
+  if (ignore >= 3) {
+    ignore = 0;
+  } else {
+    return;
+  }
   memory.shift();
   memory.push(newData);
   memoryGraph.update();
