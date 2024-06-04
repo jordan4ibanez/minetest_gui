@@ -4,9 +4,9 @@
 // import { invoke } from "@tauri-apps/api/tauri";
 import { info, attachConsole } from "tauri-plugin-log-api";
 // import { emit, listen } from '@tauri-apps/api/event';
-import { loadSettings, tabify, Settings, safeGetElementByID, environmentTextAppend, loadCharts, controllerify, safeAddEventListenerByID } from "./library";
+import { loadSettings, tabify, Settings, safeGetElementByID, environmentTextAppend, loadCharts, controllerify, safeAddEventListenerByID, addData } from "./library";
 
-// const random = Math.random;
+const random = Math.random;
 const detach = await attachConsole();
 
 
@@ -62,9 +62,10 @@ safeAddEventListenerByID("exe", "input", () => {
   const exeBox = safeGetElementByID("exe") as HTMLInputElement;
   Settings.setExe(exeBox.value);
 });
+
 // The main loop which runs every 0.05 seconds.
 function onStep(): void {
-
+  addData(random() * 100);
 }
 
 
