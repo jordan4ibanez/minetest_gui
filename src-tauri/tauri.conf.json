@@ -23,7 +23,7 @@
         "ask": false,
         "confirm": false,
         "message": true,
-        "open": false,
+        "open": true,
         "save": false
       },
       "clipboard": {

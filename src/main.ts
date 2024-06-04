@@ -2,9 +2,10 @@
 // import { invokeTauriCommand } from "@tauri-apps/api/helpers/tauri";
 // import { Command } from "@tauri-apps/api/shell";
 // import { invoke } from "@tauri-apps/api/tauri";
-import { info, attachConsole } from "tauri-plugin-log-api";
+import { info, attachConsole, error } from "tauri-plugin-log-api";
 // import { emit, listen } from '@tauri-apps/api/event';
 import { loadSettings, tabify, Settings, safeGetElementByID, environmentTextAppend, loadCharts, controllerify, safeAddEventListenerByID, addData } from "./library";
+import { open } from "@tauri-apps/api/dialog";
 
 const random = Math.random;
 const detach = await attachConsole();
@@ -68,7 +69,21 @@ function onStep(): void {
   addData(random() * 100);
 }
 
+safeAddEventListenerByID("findexebutton", "click", async () => {
+  info("click");
+  let exeThing: string | string[] | null = await open({
+    multiple: false,
+  });
 
+  if (exeThing === null || exeThing instanceof Array) {
+    error("wat");
+    return;
+  }
+
+  (safeGetElementByID("exe") as HTMLInputElement).value = exeThing;
+
+  Settings.setExe(exeThing);
+});
 
 window.addEventListener("resize", () => {
   // info("resized!");
