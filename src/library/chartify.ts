@@ -18,7 +18,7 @@ let memoryGraph: Chart<"line", number[], number> = new Chart(memorychartcanvas, 
   data: {
     labels: timeSpan,
     datasets: [{
-      label: 'Memory consumption',
+      label: 'Memory consumption (Megabytes)',
       data: memory,
       borderWidth: 1
     }]
