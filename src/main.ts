@@ -6,6 +6,7 @@ import { info, attachConsole, error } from "tauri-plugin-log-api";
 // import { emit, listen } from '@tauri-apps/api/event';
 import { loadSettings, tabify, Settings, safeGetElementByID, environmentTextAppend, loadCharts, controllerify, safeAddEventListenerByID, addData, memoryPollLogic } from "./library";
 import { open } from "@tauri-apps/api/dialog";
+import { appDir } from "@tauri-apps/api/path";
 
 // const random = Math.random;
 const detach = await attachConsole();
@@ -69,14 +70,6 @@ safeAddEventListenerByID("findexebutton", "click", async () => {
   info("click");
   let exeThing: string | string[] | null = await open({
     multiple: false,
-    filters: [{
-      name: "minetest",
-      extensions: []
-    },
-    {
-      name: "minetestserver",
-      extensions: []
-    }]
   });
 
   if (exeThing === null || exeThing instanceof Array) {
