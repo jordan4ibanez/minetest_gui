@@ -77,6 +77,9 @@ safeAddEventListenerByID("findexebutton", "click", async () => {
   Settings.setExe(exeThing);
 });
 
+// let x: Command = new Command("minetestserver", "");
+// let y = await x.spawn();
+// info(y.pid.toString());
 
 
 // The main loop which runs every 0.05 seconds.
