@@ -8,10 +8,10 @@ const memorychartcanvas = safeGetElementByID('memorychart') as HTMLCanvasElement
 
 let timeSpan: number[] = [];
 for (let i = 0; i < 30; i++) {
-  timeSpan.push(i);
+  timeSpan.push(29 - i);
 }
 
-let ignore: number = 0;
+let timer: number = 0;
 
 let memoryGraph: Chart<"line", number[], number> = new Chart(memorychartcanvas, {
   type: 'line',
@@ -34,16 +34,20 @@ let memoryGraph: Chart<"line", number[], number> = new Chart(memorychartcanvas, 
 });
 
 export function addData(newData: number): void {
-  // This is a horrible way to improve performance :D
-  ignore++;
-  if (ignore >= 3) {
-    ignore = 0;
-  } else {
-    return;
-  }
   memory.shift();
   memory.push(newData);
   memoryGraph.update();
+}
+
+export function memoryPollLogic(): void {
+  timer += 0.05;
+
+  if (timer < 1) {
+    return;
+  }
+
+  timer = 0;
+  addData(Math.random() * 100);
 }
 
 export function loadCharts(): void {
