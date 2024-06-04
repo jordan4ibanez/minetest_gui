@@ -76,11 +76,18 @@
         "assetScope": []
       },
       "shell": {
-        "all": false,
+        "all": true,
         "execute": true,
         "open": true,
-        "scope": [],
-        "sidecar": false
+        "scope": [
+          {
+            "name": "minetestserver",
+            "cmd": "minetestserver",
+            "args": true,
+            "sidecar": false
+          }
+        ],
+        "sidecar": true
       },
       "window": {
         "all": false,
