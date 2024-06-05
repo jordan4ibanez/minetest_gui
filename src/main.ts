@@ -85,14 +85,16 @@ safeAddEventListenerByID("findexebutton", "click", async () => {
 const command = "bash";
 // const args = ["-c", `${Settings.getExe()} --gameid forgotten_lands`];
 // const command = "minetestserver";
-const args = ["--gameid=forgotten-lands"];
+const args = ["-c", "minetestserver --server --gameid forgotten-lands -port 30234"];
 
 //! attempt to get this thing to spawn the minetest executable
-let x: Command = new Command(command, ["-c", "minetestserver", "gameid forgotten-lands"]);
+let x: Command = new Command(command, args);
 x.stdout.addListener("data", (...args: any[]) => {
   for (const thing of args) {
     if (typeof thing === "string") {
-      environmentTextAppend(`${thing.trim()}`/*.slice(11)*/);
+      environmentTextAppend(thing.trim() + "\n"/*.slice(11)*/);
+    } else {
+      info("wut");
     }
   }
   // environmentTextAppend(args);
@@ -101,7 +103,7 @@ x.stdout.addListener("data", (...args: any[]) => {
 x.stderr.addListener("data", (...args: any[]) => {
   for (const thing of args) {
     if (typeof thing === "string") {
-      environmentTextAppend(thing/*.slice(11)*/);
+      environmentTextAppend(thing + "\n"/*.slice(11)*/);
     } else {
       info("wut");
     }
@@ -114,6 +116,8 @@ info(y.pid.toString());
 // The main loop which runs every 0.05 seconds.
 function onStep(): void {
   memoryPollLogic();
+
+  printf(y.pid)
 }
 
 // Internal timer runs main at 20 FPS.
