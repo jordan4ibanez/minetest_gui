@@ -145,7 +145,7 @@ export function timeify(): string {
  */
 export function environmentTextAppend(newText: string): void {
   let textArea = safeGetElementByID("environment-text") as HTMLTextAreaElement;
-  textArea.value += `${newText}\n`; /*[${timeify()}] */
+  textArea.value += newText; /*[${timeify()}] */
 };
 
 /**

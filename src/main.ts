@@ -82,24 +82,31 @@ safeAddEventListenerByID("findexebutton", "click", async () => {
 // let y = await x.spawn();
 // info(y.pid.toString());
 
+const command = "bash";
+// const args = ["-c", `${Settings.getExe()} --gameid forgotten_lands`];
+// const command = "minetestserver";
+const args = ["--gameid=forgotten-lands"];
+
 //! attempt to get this thing to spawn the minetest executable
-let x: Command = new Command("bash", ["-c", Settings.getExe()]);
+let x: Command = new Command(command, ["-c", "minetestserver", "gameid forgotten-lands"]);
 x.stdout.addListener("data", (...args: any[]) => {
   for (const thing of args) {
     if (typeof thing === "string") {
-      environmentTextAppend(thing.trim());
+      environmentTextAppend(`${thing.trim()}`/*.slice(11)*/);
     }
   }
   // environmentTextAppend(args);
-  info(`command stdout: "${args}"`);
+  // printf(args);
 });
 x.stderr.addListener("data", (...args: any[]) => {
   for (const thing of args) {
     if (typeof thing === "string") {
-      environmentTextAppend(thing.trim().slice(11));
+      environmentTextAppend(thing/*.slice(11)*/);
+    } else {
+      info("wut");
     }
   }
-  printf(args);
+  // printf(args);
 });
 let y = await x.spawn();
 info(y.pid.toString());
