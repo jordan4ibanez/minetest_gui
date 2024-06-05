@@ -1,6 +1,6 @@
 import { Command } from "@tauri-apps/api/shell";
 import { info, attachConsole, error } from "tauri-plugin-log-api";
-import { loadSettings, tabify, Settings, safeGetElementByID, environmentTextAppend, loadCharts, controllerify, safeAddEventListenerByID, addData, memoryPollLogic } from "./library";
+import { loadSettings, tabify, Settings, safeGetElementByID, environmentTextAppend, loadCharts, controllerify, safeAddEventListenerByID, addData, memoryPollLogic, printf } from "./library";
 import { open } from "@tauri-apps/api/dialog";
 
 // const random = Math.random;
@@ -85,9 +85,22 @@ safeAddEventListenerByID("findexebutton", "click", async () => {
 //! attempt to get this thing to spawn the minetest executable
 let x: Command = new Command("bash", ["-c", Settings.getExe()]);
 x.stdout.addListener("data", (...args: any[]) => {
-  info("hi");
+  for (const thing of args) {
+    if (typeof thing === "string") {
+      environmentTextAppend(thing.trim());
+    }
+  }
+  // environmentTextAppend(args);
+  info(`command stdout: "${args}"`);
 });
-
+x.stderr.addListener("data", (...args: any[]) => {
+  for (const thing of args) {
+    if (typeof thing === "string") {
+      environmentTextAppend(thing.trim().slice(11));
+    }
+  }
+  printf(args);
+});
 let y = await x.spawn();
 info(y.pid.toString());
 
