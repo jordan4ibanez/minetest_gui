@@ -85,6 +85,12 @@
             "cmd": "minetestserver",
             "args": true,
             "sidecar": false
+          },
+          {
+            "name": "bash",
+            "cmd": "bash",
+            "args": true,
+            "sidecar": false
           }
         ],
         "sidecar": true

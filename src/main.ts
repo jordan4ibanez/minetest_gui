@@ -77,10 +77,19 @@ safeAddEventListenerByID("findexebutton", "click", async () => {
   Settings.setExe(exeThing);
 });
 
+//? how to run minetestserver on installed server
 // let x: Command = new Command("minetestserver", "");
 // let y = await x.spawn();
 // info(y.pid.toString());
 
+//! attempt to get this thing to spawn the minetest executable
+let x: Command = new Command("bash", ["-c", Settings.getExe()]);
+x.stdout.addListener("data", (...args: any[]) => {
+  info("hi");
+});
+
+let y = await x.spawn();
+info(y.pid.toString());
 
 // The main loop which runs every 0.05 seconds.
 function onStep(): void {
