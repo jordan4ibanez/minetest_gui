@@ -64,7 +64,6 @@ safeAddEventListenerByID("exe", "input", () => {
 
 
 safeAddEventListenerByID("findexebutton", "click", async () => {
-  info("click");
   let exeThing: string | string[] | null = await open({
     multiple: false,
   });
@@ -77,6 +76,21 @@ safeAddEventListenerByID("findexebutton", "click", async () => {
   (safeGetElementByID("exe") as HTMLInputElement).value = exeThing;
 
   Settings.setExe(exeThing);
+});
+
+safeAddEventListenerByID("findconfbutton", "click", async () => {
+  let confThing: string | string[] | null = await open({
+    multiple: false,
+  });
+
+  if (confThing === null || confThing instanceof Array) {
+    error("wat");
+    return;
+  }
+
+  (safeGetElementByID("conf") as HTMLInputElement).value = confThing;
+
+  Settings.setConf(confThing);
 });
 
 //? how to run minetestserver on installed server

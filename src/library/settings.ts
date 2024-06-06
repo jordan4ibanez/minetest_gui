@@ -13,6 +13,7 @@ class Settingly {
   game: string = "minetest";
   world: string = "world1";
   exe: string = "";
+  conf: string = "";
 }
 
 const settings: Settingly = await loadSettings();
