@@ -84,9 +84,6 @@ export async function startServer(): Promise<void> {
 
   // If it's already running, this can cause problems.
 
-  if (true) {
-    return;
-  }
 
   if (command !== null || process !== null) {
     alert("Minetest server is already running!");
