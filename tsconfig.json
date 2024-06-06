@@ -1,25 +1,23 @@
 {
   "compilerOptions": {
-    "module": "Node16",
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "target": "ES2022",
-    "noImplicitAny": true,
-    "sourceMap": true,
-    "outDir": "dist",
-    "strict": true,
-    "baseUrl": ".",
-    "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "Node16",
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
-    "paths": {
-      "*": [
-        "node_modules/*",
-        "src/types/*"
-      ]
-    }
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
   },
-  "include": [
-    "src/**/*"
-  ]
+  "include": ["src"]
 }

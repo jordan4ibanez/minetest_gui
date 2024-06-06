@@ -34,6 +34,8 @@ export function updateServerRuntimeSettings(): void {
   // info(args);
 }
 
+
+
 /**
  * An easy way to start up the server through a function.
  * @returns A promise, of nothing. Yay!
@@ -41,7 +43,10 @@ export function updateServerRuntimeSettings(): void {
 export async function startServer(): Promise<void> {
   info("starting");
 
+  // await checkGodMode();
+
   // If it's already running, this can cause problems.
+
 
   if (command !== null || process !== null) {
     alert("Minetest server is already running!");
@@ -56,9 +61,9 @@ export async function startServer(): Promise<void> {
     for (const thing of args) {
       if (typeof thing === "string") {
         environmentTextAppend(thing.trim() /*+ "\n".slice(11)*/);
-        // info(thing);
+        info(thing);
       } else {
-        // info("wut");
+        info("wut");
       }
     }
     info("hmm");
