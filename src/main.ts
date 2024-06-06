@@ -2,6 +2,8 @@ import { Command } from "@tauri-apps/api/shell";
 import { info, attachConsole, error } from "tauri-plugin-log-api";
 import { loadSettings, tabify, Settings, safeGetElementByID, environmentTextAppend, loadCharts, controllerify, safeAddEventListenerByID, addData, memoryPollLogic, printf } from "./library";
 import { open } from "@tauri-apps/api/dialog";
+import { app, tauri, window } from "@tauri-apps/api";
+import { TauriEvent } from "@tauri-apps/api/event";
 
 // const random = Math.random;
 const detach = await attachConsole();
@@ -85,25 +87,26 @@ safeAddEventListenerByID("findexebutton", "click", async () => {
 const command = "bash";
 // const args = ["-c", `${Settings.getExe()} --gameid forgotten_lands`];
 // const command = "minetestserver";
-const args = ["-c", "minetestserver --server --gameid forgotten-lands -port 30234"];
+const args = ["-c", "minetestserver --terminal --gameid forgotten-lands --port 30234"];
 
 //! attempt to get this thing to spawn the minetest executable
 let x: Command = new Command(command, args);
 x.stdout.addListener("data", (...args: any[]) => {
   for (const thing of args) {
     if (typeof thing === "string") {
-      environmentTextAppend(thing.trim() + "\n"/*.slice(11)*/);
+      environmentTextAppend(thing.trim() /*+ "\n".slice(11)*/);
     } else {
       info("wut");
     }
   }
+
   // environmentTextAppend(args);
   // printf(args);
 });
 x.stderr.addListener("data", (...args: any[]) => {
   for (const thing of args) {
     if (typeof thing === "string") {
-      environmentTextAppend(thing + "\n"/*.slice(11)*/);
+      environmentTextAppend(thing /*+ "\n".slice(11)*/);
     } else {
       info("wut");
     }
@@ -117,9 +120,10 @@ info(y.pid.toString());
 function onStep(): void {
   memoryPollLogic();
 
-  printf(y.pid)
+  printf(y.pid);
 }
 
 // Internal timer runs main at 20 FPS.
 setInterval(onStep, 50);
 detach();
+
