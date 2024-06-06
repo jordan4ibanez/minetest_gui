@@ -40,7 +40,6 @@ export function updateServerRuntimeSettings(): void {
  * Checks if the minetest.conf has a name = god in it.
  */
 async function checkGodMode(): Promise<void> {
-
   const confDir = Settings.getConf();
   let path = "";
   if (confDir === "") {
@@ -48,24 +47,29 @@ async function checkGodMode(): Promise<void> {
   } else {
     path = confDir;
   }
-
-  // info(`if [ -f ${path} ]; then echo true; else echo false; fi`);
-
-  let testing = new Command(bash, [bashTrigger, `if [ -f ${path} ]; then echo true; else echo false; fi`]);
-  let exists = (await testing.execute()).stdout.trim();
-
+  const testing = new Command(bash, [bashTrigger, `if [ -f ${path} ]; then echo true; else echo false; fi`]);
+  const exists = (await testing.execute()).stdout.trim();
   if (exists === "false") {
-    // blindly make the file with bash
+    // Blindly make the file with bash.
     info("generating blank minetest.conf");
     const execution = new Command(bash, [bashTrigger, `echo "" > ${path}`]);
-    await execution.spawn();
+    await execution.execute();
   }
-
-
-
-
-
-  info("hi");
+  // Why yes, I am file editing with nothing but bash.
+  const extract = new Command(bash, [bashTrigger, `cat ${path}`]);
+  let fileContents: string = (await extract.execute()).stdout.replace(/^\s*$(?:\r\n?|\n)/gm, "").trim();
+  for (const line of fileContents.split("\n")) {
+    // If the server admin messes with this, that's their problem.
+    if (line.replace(/\s/g, '').substring(0, 5) === "name=") {
+      // if we already have it we can stop here.
+      info("found god mode, skipping.");
+      return;
+    }
+  }
+  // info("god mode not found");
+  fileContents += "\nname = god";
+  const writeCommand = new Command(bash, [bashTrigger, `echo "${fileContents}" > ${path}`]);
+  await writeCommand.execute();
 }
 
 
