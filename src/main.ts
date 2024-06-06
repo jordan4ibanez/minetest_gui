@@ -1,5 +1,5 @@
-import { attachConsole, error, info } from "tauri-plugin-log-api";
-import { loadSettings, tabify, Settings, loadCharts, memoryPollLogic, buttonSettingsApply, updateServerRuntimeSettings, fancyWindow } from "./library";
+import { attachConsole } from "tauri-plugin-log-api";
+import { loadSettings, tabify, Settings, loadCharts, memoryPollLogic, buttonSettingsApply, updateServerRuntimeSettings } from "./library";
 
 // Makes the presentation of the window nice.
 // await fancyWindow();
