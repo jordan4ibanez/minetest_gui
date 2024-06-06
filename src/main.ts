@@ -100,6 +100,7 @@ x.stdout.addListener("data", (...args: any[]) => {
     }
   }
 
+
   // environmentTextAppend(args);
   // printf(args);
 });
@@ -120,7 +121,7 @@ info(y.pid.toString());
 function onStep(): void {
   memoryPollLogic();
 
-  printf(y.pid);
+  // printf(y.pid);
 }
 
 // Internal timer runs main at 20 FPS.
