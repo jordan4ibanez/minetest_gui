@@ -53,6 +53,7 @@
     "unmaximize",
     "unminimize",
     "vite",
-    "worldlabel"
+    "worldlabel",
+    "worldname"
   ],
 }

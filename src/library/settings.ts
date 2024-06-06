@@ -1,6 +1,6 @@
 import { BaseDirectory, exists, readTextFile, writeTextFile } from "@tauri-apps/api/fs";
 import { info } from "tauri-plugin-log-api";
-import { Tabs } from ".";
+import { Tabs, updateServerRuntimeSettings } from ".";
 
 const settingFileName: string = "settings.conf";
 const dirInfo = { dir: BaseDirectory.AppData };
@@ -41,6 +41,7 @@ export const Settings = {
   setIP(ip: string): void {
     settings.ip = ip;
     saveSettings();
+    updateServerRuntimeSettings();
   },
 
   getPort(): string {
@@ -49,7 +50,9 @@ export const Settings = {
   setPort(port: string): void {
     settings.port = port;
     saveSettings();
+    updateServerRuntimeSettings();
   },
+
 
   getGame(): string {
     return settings.game;
@@ -57,6 +60,7 @@ export const Settings = {
   setGame(game: string): void {
     settings.game = game;
     saveSettings();
+    updateServerRuntimeSettings();
   },
 
   getWorld(): string {
@@ -65,6 +69,7 @@ export const Settings = {
   setWorld(world: string): void {
     settings.world = world;
     saveSettings();
+    updateServerRuntimeSettings();
   },
 
   getExe(): string {
@@ -73,6 +78,7 @@ export const Settings = {
   setExe(exe: string): void {
     settings.exe = exe;
     saveSettings();
+    updateServerRuntimeSettings();
   },
 
   getConf(): string {
@@ -81,6 +87,7 @@ export const Settings = {
   setConf(conf: string): void {
     settings.conf = conf;
     saveSettings();
+    updateServerRuntimeSettings();
   }
 };
 
