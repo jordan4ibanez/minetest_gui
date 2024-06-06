@@ -1,5 +1,5 @@
 import { attachConsole } from "tauri-plugin-log-api";
-import { loadSettings, tabify, Settings, loadCharts, controllerify, memoryPollLogic } from "./library";
+import { loadSettings, tabify, Settings, loadCharts, memoryPollLogic, buttonSettingsApply, updateServerRuntimeSettings } from "./library";
 
 
 // const random = Math.random;
@@ -13,13 +13,13 @@ await loadSettings();
 tabify(Settings.getTab());
 
 // Deploy the saved controls data.
-controllerify();
+buttonSettingsApply();
 
 // Load the charts.
 loadCharts();
 
-
-
+// Create the base server launch environment.
+updateServerRuntimeSettings();
 
 
 

@@ -245,12 +245,13 @@ safeAddEventListenerByID("exe", "input", () => {
   const exeBox = safeGetElementByID("exe") as HTMLInputElement;
   Settings.setExe(exeBox.value);
 });
+safeAddEventListenerByID("conf", "input", () => {
+  const confBox = safeGetElementByID("conf") as HTMLInputElement;
+  Settings.setConf(confBox.value);
+});
 
-safeAddEventListenerByID("startserverbutton", "click", () => {
-  startServer();
-  // Auto move to environment tab.
-  selectTab(Tabs[Tabs.environment]);
-  Settings.setTab(Tabs.environment);
+safeAddEventListenerByID("startserverbutton", "click", async () => {
+  await startServer();
 });
 
 

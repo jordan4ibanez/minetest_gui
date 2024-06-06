@@ -43,7 +43,8 @@
         "renameFile": true,
         "scope": [
           "$APPDATA",
-          "$APPDATA/*"
+          "$APPDATA/*",
+          "$HOME/.minetest/*"
         ],
         "writeFile": true
       },
@@ -81,14 +82,14 @@
         "open": true,
         "scope": [
           {
-            "name": "minetestserver",
-            "cmd": "minetestserver",
+            "name": "bash",
+            "cmd": "bash",
             "args": true,
             "sidecar": false
           },
           {
-            "name": "bash",
-            "cmd": "bash",
+            "name": "eval",
+            "cmd": "eval",
             "args": true,
             "sidecar": false
           }
