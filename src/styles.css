@@ -181,6 +181,7 @@ button.active {
     "gamelabel game game game game game game game game game"
     "worldlabel world world world world world world world world world"
     "exelabel exe exe exe exe exe exe exe exe findexe"
+    "conflabel conf conf conf conf conf conf conf conf findconf"
     "a a a a a a a a a a"
     "a a a a a a a a a a"
     "0 start start 1 stop stop 2 restart restart 3"
@@ -235,6 +236,18 @@ button.active {
 
   #findexebutton {
     grid-area: findexe;
+  }
+
+  #conflabel {
+    grid-area: conflabel;
+  }
+
+  #conf {
+    grid-area: conf;
+  }
+
+  #findconfbutton {
+    grid-area: findconf;
   }
 
   #startserverbutton {
