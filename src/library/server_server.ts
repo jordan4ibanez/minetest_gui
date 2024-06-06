@@ -33,14 +33,14 @@ export function updateServerRuntimeSettings(): void {
   // Now rebuild the args.
 
   args = `${exeCommand} --terminal --gameid ${Settings.getGame()} --worldname ${Settings.getWorld()} --port ${Settings.getPort()}`;
-  info(args);
+  // info(args);
 }
 
 /**
  * Checks if the minetest.conf has a name = god in it.
  */
 async function checkGodMode(): Promise<void> {
-  info("ye");
+
   const confDir = Settings.getConf();
   let path = "";
   if (confDir === "") {
@@ -48,18 +48,21 @@ async function checkGodMode(): Promise<void> {
   } else {
     path = confDir;
   }
-  info("uh oh");
 
-  info(`if [ -f ${path} ]; then echo true; else echo false; fi`);
+  // info(`if [ -f ${path} ]; then echo true; else echo false; fi`);
 
   let testing = new Command(bash, [bashTrigger, `if [ -f ${path} ]; then echo true; else echo false; fi`]);
   let exists = (await testing.execute()).stdout.trim();
 
-  if (exists === "true") {
-    info("noice");
-  } else {
-    info("IT AIN'T THERE!");
+  if (exists === "false") {
+    // blindly make the file with bash
+    info("generating blank minetest.conf");
+    const execution = new Command(bash, [bashTrigger, `echo "" > ${path}`]);
+    await execution.spawn();
   }
+
+
+
 
 
   info("hi");
