@@ -2,3 +2,4 @@ export { serverPayload, startServer, updateServerRuntimeSettings } from "./serve
 export { printf, Tabs, selectTab, tabify, safeGetElementByID, environmentTextAppend, buttonSettingsApply, safeAddEventListenerByID } from "./buttonify";
 export { Settings, loadSettings } from "./settings";
 export { loadCharts, addData, memoryPollLogic } from "./chartify";
+export { fancyWindow } from "./windowize";
