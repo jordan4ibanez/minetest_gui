@@ -73,6 +73,14 @@ export const Settings = {
   setExe(exe: string): void {
     settings.exe = exe;
     saveSettings();
+  },
+
+  getConf(): string {
+    return settings.conf;
+  },
+  setConf(conf: string): void {
+    settings.conf = conf;
+    saveSettings();
   }
 };
 

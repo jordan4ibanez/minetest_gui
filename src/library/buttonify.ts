@@ -1,5 +1,6 @@
 import { error, info } from "tauri-plugin-log-api";
-import { Settings } from ".";
+import { Settings, startServer } from ".";
+import { open } from "@tauri-apps/api/dialog";
 
 // I guess this framework is called buttonify now.
 
@@ -213,10 +214,90 @@ export function removePlayer(name: string): void {
 /**
  * Dump the saved settings into the controls settings thing.
  */
-export function controllerify(): void {
+export function buttonSettingsApply(): void {
   (safeGetElementByID("ip") as HTMLInputElement).value = Settings.getIP();
   (safeGetElementByID("port") as HTMLInputElement).value = Settings.getPort();
   (safeGetElementByID("game") as HTMLInputElement).value = Settings.getGame();
   (safeGetElementByID("world") as HTMLInputElement).value = Settings.getWorld();
   (safeGetElementByID("exe") as HTMLInputElement).value = Settings.getExe();
+  (safeGetElementByID("conf") as HTMLInputElement).value = Settings.getConf();
 }
+
+
+//? Hyper autosave.
+safeAddEventListenerByID("ip", "input", () => {
+  const ipBox = safeGetElementByID("ip") as HTMLInputElement;
+  Settings.setIP(ipBox.value);
+});
+safeAddEventListenerByID("port", "input", () => {
+  const portBox = safeGetElementByID("port") as HTMLInputElement;
+  Settings.setPort(portBox.value);
+});
+safeAddEventListenerByID("game", "input", () => {
+  const gameBox = safeGetElementByID("game") as HTMLInputElement;
+  Settings.setGame(gameBox.value);
+});
+safeAddEventListenerByID("world", "input", () => {
+  const worldBox = safeGetElementByID("world") as HTMLInputElement;
+  Settings.setWorld(worldBox.value);
+});
+safeAddEventListenerByID("exe", "input", () => {
+  const exeBox = safeGetElementByID("exe") as HTMLInputElement;
+  Settings.setExe(exeBox.value);
+});
+
+safeAddEventListenerByID("startserverbutton", "click", () => {
+  startServer();
+  // Auto move to environment tab.
+  selectTab(Tabs[Tabs.environment]);
+  Settings.setTab(Tabs.environment);
+});
+
+
+safeAddEventListenerByID("findexebutton", "click", async () => {
+  let exeThing: string | string[] | null = await open({
+    multiple: false,
+  });
+
+  if (exeThing === null || exeThing instanceof Array) {
+    error("wat");
+    return;
+  }
+
+  (safeGetElementByID("exe") as HTMLInputElement).value = exeThing;
+
+  Settings.setExe(exeThing);
+});
+
+safeAddEventListenerByID("findconfbutton", "click", async () => {
+  let confThing: string | string[] | null = await open({
+    multiple: false,
+  });
+
+  if (confThing === null || confThing instanceof Array) {
+    error("wat");
+    return;
+  }
+
+  (safeGetElementByID("conf") as HTMLInputElement).value = confThing;
+
+  Settings.setConf(confThing);
+});
+
+// todo: this should hook into an internal api to send the command to the server.
+safeAddEventListenerByID("command-box", "keypress", (event: KeyboardEvent) => {
+  if (event.key == "Enter") {
+
+    // Poll info.
+    const element = safeGetElementByID("command-box") as HTMLInputElement;
+    const currentCommand = element.value.trim();
+
+    // Here would be a send to server event.
+    // info(currentCommand);
+    // todo: remove this placeholder.
+    environmentTextAppend(currentCommand);
+
+    // Then clear it.
+    element.value = "";
+  }
+});
