@@ -1,6 +1,8 @@
-import { attachConsole } from "tauri-plugin-log-api";
-import { loadSettings, tabify, Settings, loadCharts, memoryPollLogic, buttonSettingsApply, updateServerRuntimeSettings } from "./library";
+import { attachConsole, error, info } from "tauri-plugin-log-api";
+import { loadSettings, tabify, Settings, loadCharts, memoryPollLogic, buttonSettingsApply, updateServerRuntimeSettings, fancyWindow } from "./library";
 
+// Makes the presentation of the window nice.
+// fancyWindow();
 
 // const random = Math.random;
 const detach = await attachConsole();
