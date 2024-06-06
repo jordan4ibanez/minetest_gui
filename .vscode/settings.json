@@ -35,6 +35,7 @@
     "minetestserver",
     "Minimizable",
     "mycooltodolist",
+    "nodegui",
     "playerbuttons",
     "playerlabel",
     "playerlist",
@@ -57,4 +58,5 @@
     "worldlabel",
     "worldname"
   ],
+  "deno.enable": true,
 }

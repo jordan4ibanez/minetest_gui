@@ -1,22 +1,22 @@
 {
   "name": "minetest_gui",
-  "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "A gui for minetest server written in typescript with nodegui running on nodejs.",
+  "main": "main.ts",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
-    "tauri": "tauri"
+    "dev": "node main.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "jordan4ibanez",
+  "license": "GPL-3.0-or-later",
+  "devDependencies": {
+    "@tsconfig/node20": "^20.1.4",
+    "@types/node": "^20.14.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
   },
   "dependencies": {
-    "@tauri-apps/api": "^1",
-    "chart.js": "^4.4.3",
-    "tauri-plugin-log-api": "github:tauri-apps/tauri-plugin-log#v1"
-  },
-  "devDependencies": {
-    "@tauri-apps/cli": "^1",
-    "typescript": "^5.0.2",
-    "vite": "^5.0.0"
+    "@nodegui/nodegui": "^0.67.0"
   }
 }
