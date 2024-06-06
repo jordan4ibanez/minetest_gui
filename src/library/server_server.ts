@@ -1,11 +1,9 @@
 import { Child, Command } from "@tauri-apps/api/shell";
 import { environmentTextAppend, printf, selectTab, Settings, Tabs } from ".";
 import { info } from "tauri-plugin-log-api";
-import { fs } from "@tauri-apps/api";
-
 const bash: string = "bash";
 
-const evaluate: string = "eval";
+// const evaluate: string = "eval";
 
 const bashTrigger: string = "-c";
 
@@ -98,6 +96,7 @@ export async function startServer(): Promise<void> {
     for (const thing of args) {
       if (typeof thing === "string") {
         environmentTextAppend(thing.trim() /*+ "\n".slice(11)*/);
+        info(thing);
       } else {
         info("wut");
       }
@@ -108,11 +107,12 @@ export async function startServer(): Promise<void> {
     for (const thing of args) {
       if (typeof thing === "string") {
         environmentTextAppend(thing /*+ "\n".slice(11)*/);
+        info(thing);
       } else {
         info("wut");
       }
     }
-    info("hmmm");
+    // info("hmmm");
   });
 
   process = await command.spawn();
@@ -132,6 +132,8 @@ export async function startServer(): Promise<void> {
 // let x: Command = new Command(command, args);
 // let y = await x.spawn();
 // info(y.pid.toString());
+
+
 
 
 export function serverPayload(): void {
