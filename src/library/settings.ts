@@ -4,14 +4,12 @@ import { Tabs, updateServerRuntimeSettings } from ".";
 
 const settingFileName: string = "settings.conf";
 const dirInfo = { dir: BaseDirectory.AppData };
-// info(`Working in path: ${await appDataDir()}`);
 
 export const tickTimeInMS = 50;
 export const tickTimeInSeconds = 0.05;
 
 class Settingly {
   tab: Tabs = Tabs.environment;
-  ip: string = "127.0.0.1";
   port: string = "300000";
   game: string = "minetest";
   world: string = "world";
@@ -36,15 +34,6 @@ export const Settings = {
   setTab(tab: Tabs): void {
     settings.tab = tab;
     saveSettings();
-  },
-
-  getIP(): string {
-    return settings.ip;
-  },
-  setIP(ip: string): void {
-    settings.ip = ip;
-    saveSettings();
-    updateServerRuntimeSettings();
   },
 
   getPort(): string {
@@ -121,7 +110,6 @@ export async function loadSettings(): Promise<Settingly> {
       const text: string = await readTextFile(settingFileName, dirInfo);
       const thing: Object = JSON.parse(text);
       if (checkReflect(thing)) {
-        // info("that's a thing :)");
         return thing as Settingly;
       } else {
         info("Looks like you might have modified the save file and if you didn't, uh oh.");
