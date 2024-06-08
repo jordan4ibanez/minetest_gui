@@ -1,6 +1,5 @@
 import { Chart } from "chart.js/auto";
 import { getPID, safeGetElementByID } from ".";
-import { info } from "tauri-plugin-log-api";
 import { Command } from "@tauri-apps/api/shell";
 // import { info } from "tauri-plugin-log-api";
 
@@ -13,6 +12,8 @@ for (let i = 0; i < 30; i++) {
   timeSpan.push(29 - i);
 }
 
+Chart.defaults.font.size = 32;
+
 let timer: number = 0;
 
 let memoryGraph: Chart<"line", number[], number> = new Chart(memorychartcanvas, {
@@ -22,16 +23,43 @@ let memoryGraph: Chart<"line", number[], number> = new Chart(memorychartcanvas, 
     datasets: [{
       label: 'Memory consumption (Megabytes)',
       data: memory,
-      borderWidth: 1
+      borderWidth: 2,
+      pointRadius: 5,
+      pointHoverRadius: 20,
+      pointHitRadius: 20,
+      borderColor: " 	#0096FF",
     }]
   },
   options: {
     scales: {
       y: {
-        beginAtZero: true
-      }
+        beginAtZero: true,
+        max: 1024,
+        ticks: {
+          color: "white"
+        },
+        grid: {
+          color: "black",
+          lineWidth: 4
+        }
+      },
+      x: {
+        ticks: {
+          color: "white"
+        },
+        grid: {
+          color: "black",
+          lineWidth: 4
+        }
+      },
     },
-    animation: false
+    color: "white",
+    animation: false,
+    maintainAspectRatio: true,
+    responsive: true,
+    // onResize: (chart) => {
+    //   chart.resize();
+    // }
   }
 });
 
@@ -48,7 +76,7 @@ export async function memoryPollLogic(delta: number): Promise<void> {
     return;
   }
 
-  info(`pid: ${getPID()}`);
+  // info(`pid: ${getPID()}`);
 
   timer = 0;
 
@@ -61,13 +89,14 @@ export async function memoryPollLogic(delta: number): Promise<void> {
     // https://stackoverflow.com/questions/131303/how-can-i-measure-the-actual-memory-usage-of-an-application-or-process
     const memPollCommand = new Command("bash", ["-c", `awk '/^Pss:/ {pss+=$2} END {print pss}' < /proc/${pid}/smaps`]);
     memPollCommand.stdout.addListener("data", (data: string) => {
-      let mb: number = parseInt(data);
-      info((mb / 1024).toFixed(1).toString());
+      memory = (parseInt(data) / 1024);
+      // info((mb / 1024).toFixed(1).toString());
     });
     await memPollCommand.execute();
   }
 
-  addData(Math.random() * 100);
+  addData(memory);
+  // addData(Math.random() * 100);
 }
 
 export function loadCharts(): void {
