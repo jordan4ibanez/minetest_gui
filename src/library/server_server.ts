@@ -1,9 +1,8 @@
 import { Child, Command } from "@tauri-apps/api/shell";
 import { environmentTextAppend, printf, selectTab, Settings, Tabs } from ".";
 import { info } from "tauri-plugin-log-api";
-const bash: string = "bash";
 
-// const evaluate: string = "eval";
+const bash: string = "bash";
 
 const bashTrigger: string = "-c";
 
