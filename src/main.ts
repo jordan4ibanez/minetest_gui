@@ -1,5 +1,6 @@
 import { attachConsole } from "tauri-plugin-log-api";
-import { loadSettings, tabify, Settings, loadCharts, memoryPollLogic, buttonSettingsApply, updateServerRuntimeSettings } from "./library";
+import { loadSettings, tabify, Settings, loadCharts, memoryPollLogic, buttonSettingsApply, updateServerRuntimeSettings, tickTimeInMS, tickTimeInSeconds } from "./library";
+
 
 // Makes the presentation of the window nice.
 // await fancyWindow();
@@ -27,12 +28,11 @@ updateServerRuntimeSettings();
 
 // The main loop which runs every 0.05 seconds.
 function onStep(): void {
-  memoryPollLogic();
-
-  // printf(y.pid);
+  const delta = tickTimeInSeconds;
+  memoryPollLogic(delta);
 }
 
 // Internal timer runs main at 20 FPS.
-setInterval(onStep, 50);
+setInterval(onStep, tickTimeInMS);
 detach();
 

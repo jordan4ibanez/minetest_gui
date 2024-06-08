@@ -39,8 +39,8 @@ export function addData(newData: number): void {
   memoryGraph.update();
 }
 
-export function memoryPollLogic(): void {
-  timer += 0.05;
+export function memoryPollLogic(delta: number): void {
+  timer += delta;
 
   if (timer < 1) {
     return;

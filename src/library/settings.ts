@@ -6,12 +6,15 @@ const settingFileName: string = "settings.conf";
 const dirInfo = { dir: BaseDirectory.AppData };
 // info(`Working in path: ${await appDataDir()}`);
 
+export const tickTimeInMS = 50;
+export const tickTimeInSeconds = 0.05;
+
 class Settingly {
   tab: Tabs = Tabs.environment;
   ip: string = "127.0.0.1";
-  port: string = "300001";
+  port: string = "300000";
   game: string = "minetest";
-  world: string = "world1";
+  world: string = "world";
   exe: string = "";
   conf: string = "";
 }

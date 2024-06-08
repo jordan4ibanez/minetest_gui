@@ -96,24 +96,37 @@ export async function startServer(): Promise<void> {
   command.stdout.addListener("data", (...args: any[]) => {
     for (const thing of args) {
       if (typeof thing === "string") {
+        info(thing.slice(0, 8));
         environmentTextAppend(thing.trim() /*+ "\n".slice(11)*/);
-        info(thing);
+        // info(thing);
       } else {
         info("wut");
       }
     }
-    info("hmm");
   });
   command.stderr.addListener("data", (...args: any[]) => {
     for (const thing of args) {
       if (typeof thing === "string") {
+        info(thing.slice(0, 8));
         environmentTextAppend(thing /*+ "\n".slice(11)*/);
-        info(thing);
+        // info(thing);
       } else {
         info("wut");
       }
     }
-    // info("hmmm");
+  });
+
+  command.addListener("close", () => {
+    info("SERVER HAS CLOSED.");
+    command = null;
+    process = null;
+  });
+
+  command.addListener("error", () => {
+    // info("SERVER HAS CRASHED.");
+    alert("Server crashed.");
+    command = null;
+    process = null;
   });
 
   process = await command.spawn();
@@ -129,12 +142,15 @@ export async function startServer(): Promise<void> {
   Settings.setTab(Tabs.environment);
 }
 
-// //! attempt to get this thing to spawn the minetest executable
-// let x: Command = new Command(command, args);
-// let y = await x.spawn();
-// info(y.pid.toString());
-
-
+/**
+ * Send a message to the server.
+ * @param message A message.
+ */
+export function messageServer(message: string): void {
+  if (process != null) {
+    process.write(message);
+  }
+}
 
 
 export function serverPayload(): void {

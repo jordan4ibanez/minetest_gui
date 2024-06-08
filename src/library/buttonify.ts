@@ -1,5 +1,5 @@
 import { error, info } from "tauri-plugin-log-api";
-import { Settings, startServer } from ".";
+import { messageServer, Settings, startServer } from ".";
 import { open } from "@tauri-apps/api/dialog";
 
 // I guess this framework is called buttonify now.
@@ -254,6 +254,11 @@ safeAddEventListenerByID("startserverbutton", "click", async () => {
   await startServer();
 });
 
+safeAddEventListenerByID("stopserverbutton", "click", async () => {
+  messageServer("/shutdown");
+});
+
+
 
 safeAddEventListenerByID("findexebutton", "click", async () => {
   let exeThing: string | string[] | null = await open({
@@ -293,10 +298,8 @@ safeAddEventListenerByID("command-box", "keypress", (event: KeyboardEvent) => {
     const element = safeGetElementByID("command-box") as HTMLInputElement;
     const currentCommand = element.value.trim();
 
-    // Here would be a send to server event.
-    // info(currentCommand);
-    // todo: remove this placeholder.
-    environmentTextAppend(currentCommand);
+    // Sent this command to the server.
+    messageServer(currentCommand);
 
     // Then clear it.
     element.value = "";
