@@ -69,6 +69,12 @@ export function addData(newData: number): void {
   memoryGraph.update();
 }
 
+function updateTextMemoryIndicator(newData: string): void {
+  let element = safeGetElementByID("memUsageLabel") as HTMLLabelElement;
+
+  element.innerHTML = ` Mem: ${newData}MB`;
+}
+
 export async function memoryPollLogic(delta: number): Promise<void> {
   timer += delta;
 
@@ -89,8 +95,8 @@ export async function memoryPollLogic(delta: number): Promise<void> {
     // https://stackoverflow.com/questions/131303/how-can-i-measure-the-actual-memory-usage-of-an-application-or-process
     const memPollCommand = new Command("bash", ["-c", `awk '/^Pss:/ {pss+=$2} END {print pss}' < /proc/${pid}/smaps`]);
     memPollCommand.stdout.addListener("data", (data: string) => {
+      updateTextMemoryIndicator((parseInt(data) / 1024).toFixed(1))
       memory = (parseInt(data) / 1024);
-      // info((mb / 1024).toFixed(1).toString());
     });
     await memPollCommand.execute();
   }
