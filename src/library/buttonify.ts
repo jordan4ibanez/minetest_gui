@@ -330,10 +330,19 @@ export function environmentTextAppend(newText: string): void {
  */
 function addPlayerButton(name: string): void {
   let players: HTMLDivElement = safeGetElementByID("playerlist") as HTMLDivElement;
-  let playerButton = document.createElement("button");
+  let playerButton = document.createElement("button") as HTMLButtonElement;
   playerButton.className = "playerbuttons";
   playerButton.id = `${name}-button`;
   playerButton.innerText = name;
+
+  // This is neat.
+  // Add the player's name into the command box when you click it.
+  // Useful for complex player names.
+  playerButton.addEventListener("click", () => {
+    let commandBox = safeGetElementByID("command-box") as HTMLInputElement;
+    commandBox.value += name;
+  });
+
   players.appendChild(playerButton);
 }
 
