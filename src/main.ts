@@ -29,7 +29,7 @@ updateServerRuntimeSettings();
 // The main loop which runs every 0.05 seconds.
 async function onStep(): Promise<void> {
   const delta = tickTimeInSeconds;
-  memoryPollLogic(delta);
+  await memoryPollLogic(delta);
   await restartWatch(delta);
 }
 
