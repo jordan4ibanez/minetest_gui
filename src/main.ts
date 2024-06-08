@@ -1,5 +1,5 @@
 import { attachConsole } from "tauri-plugin-log-api";
-import { loadSettings, tabify, Settings, loadCharts, memoryPollLogic, buttonSettingsApply, updateServerRuntimeSettings, tickTimeInMS, tickTimeInSeconds } from "./library";
+import { loadSettings, tabify, Settings, loadCharts, memoryPollLogic, buttonSettingsApply, updateServerRuntimeSettings, tickTimeInMS, tickTimeInSeconds, restartWatch } from "./library";
 
 
 // Makes the presentation of the window nice.
@@ -30,6 +30,7 @@ updateServerRuntimeSettings();
 function onStep(): void {
   const delta = tickTimeInSeconds;
   memoryPollLogic(delta);
+  restartWatch(delta);
 }
 
 // Internal timer runs main at 20 FPS.
