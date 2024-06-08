@@ -1,6 +1,6 @@
 [package]
 name = "minetest_gui"
-version = "1.0.3"
+version = "1.0.4"
 description = "A gui for minetest. Uses tauri and typescript."
 authors = ["jordan4ibanez", "siliconsniffer"]
 edition = "2021"
