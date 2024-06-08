@@ -173,12 +173,14 @@ function filterText(input: string): boolean {
 
   // We need to walk along this string cause I'm too stupid to do a regex.
 
+  // info(input)
+
   // We really don't need warnings.
   let warningThing = input;
   for (let i = 0; i < 2; i++) {
     warningThing = warningThing.substring(warningThing.indexOf(" ") + 1);
   }
-  warningThing = warningThing.substring(0, warningThing.indexOf("[")).trim()
+  warningThing = warningThing.substring(0, warningThing.indexOf("[")).trim();
   if (warningThing === "WARNING") {
     return true;
   }
@@ -189,8 +191,14 @@ function filterText(input: string): boolean {
   }
   filtered = filtered.trim();
 
-  // Don't bother with log messages.
+  // Don't bother with log messages. Unless it's a command.
   if (filtered.substring(0, filtered.indexOf(" ")) === "[log]") {
+
+    let logCheckCaught = filtered.substring(filtered.indexOf(" "));
+    logCheckCaught = logCheckCaught.substring(0, filtered.indexOf("command") + 2).trim();
+    if (logCheckCaught === "Caught command") {
+      return false;
+    }
     return true;
   }
 
@@ -258,6 +266,30 @@ function finalTextProcessing(input: string): string {
   for (let i = 0; i < 3; i++) {
     output = output.substring(output.indexOf(" ") + 1);
   }
+
+  // This is so ridiculously unnecessary but I want to do it.
+  let logCheckCheck = output;
+  if (logCheckCheck.substring(0, 5) === "[log]") {
+
+    // https://stackoverflow.com/a/41751240
+    let ranCommandData = logCheckCheck.match(/'.*?'/g);
+    if (ranCommandData) {
+      // Now we assemble this garbage.
+      const command = ranCommandData[0].replace(/['']+/g, '');;
+      const user = ranCommandData[1].replace(/['']+/g, '');;
+
+      output = `${user} ran the command [${command}]`;
+
+      if (ranCommandData[2] !== "''") {
+        // https://stackoverflow.com/a/19156197
+        output += ` with arguments [${ranCommandData[2].replace(/['']+/g, '')}]`;
+      }
+      output += "\n";
+    } else {
+      output = "you found a bug :D";
+    }
+  }
+
   output = `[${timeify()}]: ${output}`;
   return output;
 }
