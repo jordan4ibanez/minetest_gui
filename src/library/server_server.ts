@@ -1,5 +1,5 @@
 import { Child, Command } from "@tauri-apps/api/shell";
-import { environmentTextAppend, printf, selectTab, Settings, Tabs } from ".";
+import { environmentTextAppend, selectTab, Settings, Tabs } from ".";
 import { info } from "tauri-plugin-log-api";
 
 const bash: string = "bash";
@@ -91,7 +91,7 @@ export async function startServer(): Promise<void> {
 
   command = new Command(bash, [bashTrigger, args]);
 
-  printf(bash, bashTrigger, args);
+  // printf(bash, bashTrigger, args);
 
   command.stdout.addListener("data", (...args: any[]) => {
     for (const thing of args) {
@@ -123,7 +123,7 @@ export async function startServer(): Promise<void> {
 
   process = await command.spawn();
 
-  info(process.pid.toString());
+  // info(process.pid.toString());
 
   // Auto move to environment tab.
   selectTab(Tabs[Tabs.environment]);
@@ -136,9 +136,17 @@ export async function startServer(): Promise<void> {
  */
 export function getPID(): number {
   if (process == null) {
-    return -1
+    return -1;
   }
   return process.pid;
+}
+
+/**
+ * Get if the server is currently running.
+ * @returns If the server is running.
+ */
+export function isRunning(): boolean {
+  return (command != null || process != null);
 }
 
 /**
@@ -191,7 +199,6 @@ export async function restartWatch(delta: number): Promise<void> {
 
   restarting = false;
 
-  info("hi");
 }
 
 /**
@@ -205,6 +212,12 @@ export async function killAllServers(): Promise<void> {
   });
   await killCommand.execute();
 }
+
+// export function spamTest(): void {
+//   if (isRunning()) {
+//     messageServer("hi" + Math.random());
+//   }
+// }
 
 export function serverPayload(): void {
 
