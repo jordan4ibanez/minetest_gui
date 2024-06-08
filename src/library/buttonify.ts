@@ -159,14 +159,8 @@ export function tabify(defaultTab: Tabs): void {
  * @returns Time in HH:MM:SS format.
  */
 export function timeify(): string {
-  const date = new Date();
-  let accumulator: string = "";
-  [date.getHours(), date.getMinutes(), date.getSeconds()].forEach((v, k) => {
-    accumulator += (v < 10 ? `0${v}` : v) + (k == 2 ? "" : ":");
-  });
-  return accumulator;
+  return new Date().toLocaleString('en-US', { hour: 'numeric', minute: "2-digit", hour12: false });
 }
-
 
 /**
  * Check if a message is a place or digs spam message from the terminal.
@@ -174,7 +168,21 @@ export function timeify(): string {
  * @returns If it should be filtered out.
  */
 function filterText(input: string): boolean {
+
+  // This is the most horrendously written function ever and I don't care.
+
   // We need to walk along this string cause I'm too stupid to do a regex.
+
+  // We really don't need warnings.
+  let warningThing = input;
+  for (let i = 0; i < 2; i++) {
+    warningThing = warningThing.substring(warningThing.indexOf(" ") + 1);
+  }
+  warningThing = warningThing.substring(0, warningThing.indexOf("[")).trim()
+  if (warningThing === "WARNING") {
+    return true;
+  }
+
   let filtered = input;
   for (let i = 0; i < 4; i++) {
     filtered = filtered.substring(filtered.indexOf(":") + 1);
@@ -223,21 +231,17 @@ function checkIfJoiningOrLeaving(input: string): [string, string] | null {
   }
   joinCheck = joinCheck.trim().substring(0, joinCheck.indexOf(" ")).trim();
   if (joinCheck === "joins") {
-    info("adding player button for " + playerName);
     addPlayerButton(playerName);
     return ["joined", playerName];
   }
 
 
   let leavesCheck = input;
-  info(leavesCheck);
   for (let i = 0; i < 4; i++) {
     leavesCheck = leavesCheck.substring(leavesCheck.indexOf(" ") + 1);
   }
   leavesCheck = leavesCheck.trim().substring(0, leavesCheck.indexOf(" ")).trim();
-  info(leavesCheck);
   if (leavesCheck === "leaves") {
-    info("removing player button for " + playerName);
     removePlayerButton(playerName);
     return ["left", playerName];
   }
@@ -249,9 +253,14 @@ function checkIfJoiningOrLeaving(input: string): [string, string] | null {
  * Remove the server spam info from the messages.
  * @param input The raw text.
  */
-// function finalTextProcessing(input: string): string {
-
-// }
+function finalTextProcessing(input: string): string {
+  let output = input;
+  for (let i = 0; i < 3; i++) {
+    output = output.substring(output.indexOf(" ") + 1);
+  }
+  output = `[${timeify()}]: ${output}`;
+  return output;
+}
 
 /**
  * Append text to the environmental text log box thing.
@@ -265,13 +274,15 @@ export function environmentTextAppend(newText: string): void {
   }
 
   let testJoinify: [string, string] | null = checkIfJoiningOrLeaving(newText);
-  
+
   let textArea = safeGetElementByID("environment-text") as HTMLTextAreaElement;
 
-  if (testJoinify == null) {  
-    textArea.value += newText.substring(newText.indexOf(" "), newText.length);
+  finalTextProcessing(newText);
+
+  if (testJoinify == null) {
+    textArea.value += finalTextProcessing(newText);
   } else {
-    textArea.value += `${testJoinify[1]} has ${testJoinify[0]} the game.\n`;
+    textArea.value += `[${timeify()}]: ${testJoinify[1]} has ${testJoinify[0]} the game.\n`;
   }
 
   if (magnetized) {
