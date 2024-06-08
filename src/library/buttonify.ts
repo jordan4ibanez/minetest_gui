@@ -215,7 +215,7 @@ export function environmentTextAppend(newText: string): void {
   }
 
   let textArea = safeGetElementByID("environment-text") as HTMLTextAreaElement;
-  textArea.value += newText;
+  textArea.value += newText.substring(newText.indexOf(" "), newText.length);
 
   if (magnetized) {
     const height = textArea.scrollHeight;
