@@ -206,8 +206,9 @@ function filterText(input: string): boolean {
 /**
  * Check if the server is posting a leave and join message.
  * @param input Raw text.
+ * @returns [join/left, player name] or null.
  */
-function checkIfJoiningOrLeaving(input: string): void {
+function checkIfJoiningOrLeaving(input: string): [string, string] | null {
 
   let playerName = input;
   for (let i = 0; i < 3; i++) {
@@ -224,7 +225,7 @@ function checkIfJoiningOrLeaving(input: string): void {
   if (joinCheck === "joins") {
     info("adding player button for " + playerName);
     addPlayerButton(playerName);
-    return;
+    return ["joined", playerName];
   }
 
 
@@ -238,8 +239,19 @@ function checkIfJoiningOrLeaving(input: string): void {
   if (leavesCheck === "leaves") {
     info("removing player button for " + playerName);
     removePlayerButton(playerName);
+    return ["left", playerName];
   }
+
+  return null;
 }
+
+/**
+ * Remove the server spam info from the messages.
+ * @param input The raw text.
+ */
+// function finalTextProcessing(input: string): string {
+
+// }
 
 /**
  * Append text to the environmental text log box thing.
@@ -252,10 +264,15 @@ export function environmentTextAppend(newText: string): void {
     return;
   }
 
-  checkIfJoiningOrLeaving(newText);
-
+  let testJoinify: [string, string] | null = checkIfJoiningOrLeaving(newText);
+  
   let textArea = safeGetElementByID("environment-text") as HTMLTextAreaElement;
-  textArea.value += newText.substring(newText.indexOf(" "), newText.length);
+
+  if (testJoinify == null) {  
+    textArea.value += newText.substring(newText.indexOf(" "), newText.length);
+  } else {
+    textArea.value += `${testJoinify[1]} has ${testJoinify[0]} the game.\n`;
+  }
 
   if (magnetized) {
     const height = textArea.scrollHeight;
