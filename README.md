@@ -8,6 +8,8 @@ To use this you're going to need a minetestserver with this PR:
 https://github.com/minetest/minetest/pull/14734
 
 
+A video of it: https://youtu.be/X2O0gKai1CI
+
 ## Requires:
 
 
