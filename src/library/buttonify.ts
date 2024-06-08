@@ -59,6 +59,17 @@ export function printf(...input: any[]): void {
   });
 })();
 
+/**
+ * Clear all players out.
+ */
+export function clearPlayers(): void {
+  players.sort((a, b) => a.localeCompare(b));
+  players.forEach((player: string) => {
+    removePlayerButton(player);
+  });
+  players = [];
+}
+
 
 /**
  * Safely get an element by it's ID. It'll just crash if it doesn't exist.
@@ -442,11 +453,13 @@ safeAddEventListenerByID("stopserverbutton", "click", () => {
   if (!isRunning()) {
     alert("No server is running!");
   }
+  clearPlayers();
   messageServer("/shutdown");
 });
 
 safeAddEventListenerByID("restartserverbutton", "click", () => {
   messageServer("/shutdown");
+  clearPlayers();
   triggerRestartWatch();
 });
 

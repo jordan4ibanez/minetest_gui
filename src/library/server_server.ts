@@ -1,5 +1,5 @@
 import { Child, Command } from "@tauri-apps/api/shell";
-import { environmentTextAppend, selectTab, Settings, Tabs } from ".";
+import { clearPlayers, environmentTextAppend, selectTab, Settings, Tabs } from ".";
 // import { info } from "tauri-plugin-log-api";
 
 const bash: string = "bash";
@@ -112,6 +112,7 @@ export async function startServer(): Promise<void> {
     // info("SERVER HAS CLOSED.");
     command = null;
     process = null;
+    clearPlayers();
   });
 
   command.addListener("error", () => {
@@ -119,6 +120,7 @@ export async function startServer(): Promise<void> {
     alert("Server crashed.");
     command = null;
     process = null;
+    clearPlayers();
   });
 
   process = await command.spawn();
