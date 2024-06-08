@@ -167,11 +167,53 @@ export function timeify(): string {
   return accumulator;
 }
 
+
+/**
+ * Check if a message is a place or digs spam message from the terminal.
+ * @param input Input text.
+ * @returns If it should be filtered out.
+ */
+function filterText(input: string): boolean {
+  // We need to walk along this string cause I'm too stupid to do a regex.
+  let filtered = input;
+  for (let i = 0; i < 4; i++) {
+    filtered = filtered.substring(filtered.indexOf(":") + 1);
+  }
+  filtered = filtered.trim();
+
+  // Don't bother with log messages.
+  if (filtered.substring(0, filtered.indexOf(" ")) === "[log]") {
+    return true;
+  }
+
+  // Check if it's a chat message.
+  if (filtered.substring(0, 4) === "CHAT") {
+    return false;
+  }
+
+  filtered = filtered.substring(filtered.indexOf(" ") + 1);
+
+  // Now we don't want to be spammed with people building and mining etc so, get rid of it.
+  const finalFilter = filtered.substring(0, filtered.indexOf(" "));
+  if (finalFilter === "digs" || finalFilter === "places" || finalFilter === "damaged" || finalFilter == "respawns") {
+    return true;
+  }
+
+  // Else you probably want to know about it!
+  return false;
+}
+
 /**
  * Append text to the environmental text log box thing.
  * @param newText The new text to append.
  */
 export function environmentTextAppend(newText: string): void {
+
+  // Don't spam the server admin with random server messages.
+  if (filterText(newText)) {
+    return;
+  }
+
   let textArea = safeGetElementByID("environment-text") as HTMLTextAreaElement;
   textArea.value += newText;
 
