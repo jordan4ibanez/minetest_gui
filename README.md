@@ -1,6 +1,9 @@
 # minetest_gui
  A gui for minetest. Uses tauri and typescript.
 
+
+### Only works on Linux.
+
 ## Requires:
 
 
