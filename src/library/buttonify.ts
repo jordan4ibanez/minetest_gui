@@ -1,10 +1,12 @@
 import { error, info } from "tauri-plugin-log-api";
-import { killAllServers, messageServer, Settings, startServer, triggerRestartWatch } from ".";
+import { isRunning, killAllServers, messageServer, Settings, startServer, triggerRestartWatch } from ".";
 import { open } from "@tauri-apps/api/dialog";
 
 // I guess this framework is called buttonify now.
 
 let players: string[] = [];
+
+let magnetized: boolean = true;
 
 /**
  * Easy enum for the 3 tabs. Makes it easy to add more.
@@ -29,6 +31,31 @@ export function stringifyTab(tab: Tabs): string {
 export function printf(...input: any[]): void {
   info(input.join(" "));
 }
+
+/**
+ * This is a logic gate which magnetizes the text are to the bottom but allows
+ * you to unlock it by scrolling up.
+ * 
+ * Basically can allow you to choose to look at new messages automatically.
+ */
+(() => {
+  let textArea = safeGetElementByID("environment-text") as HTMLTextAreaElement;
+
+  textArea.addEventListener("scroll", () => {
+    const height = textArea.scrollHeight;
+    const offset = textArea.offsetHeight;
+    const scroll = textArea.scrollTop;
+
+    // Written out verbosely to ensure maintainability.
+    const isAtBottom = (height - offset <= scroll);
+
+    if (isAtBottom) {
+      magnetized = true;
+    } else {
+      magnetized = false;
+    }
+  });
+})();
 
 
 /**
@@ -146,7 +173,13 @@ export function timeify(): string {
  */
 export function environmentTextAppend(newText: string): void {
   let textArea = safeGetElementByID("environment-text") as HTMLTextAreaElement;
-  textArea.value += newText; /*[${timeify()}] */
+  textArea.value += newText;
+
+  if (magnetized) {
+    const height = textArea.scrollHeight;
+    const offset = textArea.offsetHeight;
+    textArea.scrollTop = height - offset;
+  }
 };
 
 /**
@@ -248,6 +281,9 @@ safeAddEventListenerByID("startserverbutton", "click", async () => {
 });
 
 safeAddEventListenerByID("stopserverbutton", "click", () => {
+  if (!isRunning()) {
+    alert("No server is running!");
+  }
   messageServer("/shutdown");
 });
 
