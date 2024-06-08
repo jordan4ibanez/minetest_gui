@@ -27,10 +27,10 @@ updateServerRuntimeSettings();
 
 
 // The main loop which runs every 0.05 seconds.
-function onStep(): void {
+async function onStep(): Promise<void> {
   const delta = tickTimeInSeconds;
   memoryPollLogic(delta);
-  restartWatch(delta);
+  await restartWatch(delta);
 }
 
 // Internal timer runs main at 20 FPS.

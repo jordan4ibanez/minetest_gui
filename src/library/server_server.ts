@@ -77,7 +77,7 @@ async function checkGodMode(): Promise<void> {
  * @returns A promise, of nothing. Yay!
  */
 export async function startServer(): Promise<void> {
-  info("starting");
+  // info("starting");
 
   await checkGodMode();
 
@@ -134,8 +134,8 @@ export async function startServer(): Promise<void> {
   info(process.pid.toString());
 
 
-  info("starting");
-  environmentTextAppend("starting");
+  // info("starting");
+  // environmentTextAppend("starting");
 
   // Auto move to environment tab.
   selectTab(Tabs[Tabs.environment]);
@@ -188,6 +188,8 @@ export async function restartWatch(delta: number): Promise<void> {
   await startServer();
 
   restarting = false;
+
+  info("hi");
 }
 
 /**
