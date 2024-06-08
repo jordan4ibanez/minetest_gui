@@ -12,6 +12,9 @@ let command: Command | null = null;
 
 let process: Child | null = null;
 
+let restarting: boolean = false;
+let restartWatchTimer: number = 0;
+
 /**
  * Catch-all whenever the server settings are updated.
  */
@@ -68,8 +71,6 @@ async function checkGodMode(): Promise<void> {
   const writeCommand = new Command(bash, [bashTrigger, `echo "${fileContents}" > ${path}`]);
   await writeCommand.execute();
 }
-
-
 
 /**
  * An easy way to start up the server through a function.
@@ -151,6 +152,55 @@ export function messageServer(message: string): void {
   }
 }
 
+/**
+ * Begin the restart procedure.
+ */
+export function triggerRestartWatch(): void {
+  restarting = true;
+}
+
+/**
+ * Makes the restart button work.
+ * 
+ * Checking this boolean every 0.05 seconds might be
+ * quite taxing if you're running this on a pentium 2.
+ * 
+ * @param delta Time between last step.
+ * @returns nothing :D
+ */
+export async function restartWatch(delta: number): Promise<void> {
+  if (!restarting) {
+    return;
+  }
+
+  restartWatchTimer += delta;
+
+  if (restartWatchTimer < 1) {
+    return;
+  }
+
+  restartWatchTimer = 0;
+
+  if (command != null || process != null) {
+    return;
+  }
+
+  await startServer();
+
+  restarting = false;
+}
+
+/**
+ * Make your distro run killall minetestserver.
+ */
+export async function killAllServers(): Promise<void> {
+  const killCommand = new Command(bash, [bashTrigger, "killall minetestserver"]);
+  // If this outputs anything then no servers are running.
+  killCommand.stderr.addListener("data", () => {
+    alert("No zombie servers running!");
+  });
+  await killCommand.execute();
+}
 
 export function serverPayload(): void {
 
