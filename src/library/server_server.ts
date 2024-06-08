@@ -96,22 +96,14 @@ export async function startServer(): Promise<void> {
   command.stdout.addListener("data", (...args: any[]) => {
     for (const thing of args) {
       if (typeof thing === "string") {
-        info(thing.slice(0, 8));
-        environmentTextAppend(thing.trim() /*+ "\n".slice(11)*/);
-        // info(thing);
-      } else {
-        info("wut");
+        environmentTextAppend(thing.trim());
       }
     }
   });
   command.stderr.addListener("data", (...args: any[]) => {
     for (const thing of args) {
       if (typeof thing === "string") {
-        info(thing.slice(0, 8));
-        environmentTextAppend(thing /*+ "\n".slice(11)*/);
-        // info(thing);
-      } else {
-        info("wut");
+        environmentTextAppend(thing);
       }
     }
   });
@@ -133,13 +125,20 @@ export async function startServer(): Promise<void> {
 
   info(process.pid.toString());
 
-
-  // info("starting");
-  // environmentTextAppend("starting");
-
   // Auto move to environment tab.
   selectTab(Tabs[Tabs.environment]);
   Settings.setTab(Tabs.environment);
+}
+
+/**
+ * Get the PID of the minetestserver.
+ * @returns The PID of the minetestserver.
+ */
+export function getPID(): number {
+  if (process == null) {
+    return -1
+  }
+  return process.pid;
 }
 
 /**
@@ -156,6 +155,9 @@ export function messageServer(message: string): void {
  * Begin the restart procedure.
  */
 export function triggerRestartWatch(): void {
+  // Auto move to environment tab.
+  selectTab(Tabs[Tabs.environment]);
+  Settings.setTab(Tabs.environment);
   restarting = true;
 }
 
