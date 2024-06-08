@@ -176,7 +176,6 @@ button.active {
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(3, 1fr);
   grid-template-areas:
-    "iplabel ip ip ip ip ip ip ip ip ip"
     "portlabel port port port port port port port port port"
     "gamelabel game game game game game game game game game"
     "worldlabel world world world world world world world world world"
@@ -185,6 +184,9 @@ button.active {
     "a a a a a a a a a a"
     "a a a a a a a a a a"
     "0 start start 1 stop stop 2 restart restart 3"
+    "b b b b b b b b b b"
+    "b b b b b b b b b b"
+    "4 4 4 kill kill kill kill 5 5 5"
   ;
   gap: 10px;
 
@@ -192,14 +194,6 @@ button.active {
     margin-left: auto;
     margin-top: auto;
     margin-bottom: auto;
-  }
-
-  #iplabel {
-    grid-area: iplabel;
-  }
-
-  #ip {
-    grid-area: ip;
   }
 
   #portlabel {
@@ -260,6 +254,10 @@ button.active {
 
   #restartserverbutton {
     grid-area: restart;
+  }
+
+  #killall {
+    grid-area: kill;
   }
 }
 
