@@ -65,7 +65,7 @@ export function printf(...input: any[]): void {
 export function clearPlayers(): void {
   players.sort((a, b) => a.localeCompare(b));
   players.forEach((player: string) => {
-    removePlayerButton(player);
+    removePlayer(player);
   });
   players = [];
 }
@@ -252,7 +252,7 @@ function checkIfJoiningOrLeaving(input: string): [string, string] | null {
   }
   joinCheck = joinCheck.trim().substring(0, joinCheck.indexOf(" ")).trim();
   if (joinCheck === "joins") {
-    addPlayerButton(playerName);
+    addPlayer(playerName);
     return ["joined", playerName];
   }
 
@@ -263,7 +263,7 @@ function checkIfJoiningOrLeaving(input: string): [string, string] | null {
   }
   leavesCheck = leavesCheck.trim().substring(0, leavesCheck.indexOf(" ")).trim();
   if (leavesCheck === "leaves") {
-    removePlayerButton(playerName);
+    removePlayer(playerName);
     return ["left", playerName];
   }
 
