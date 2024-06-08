@@ -204,6 +204,44 @@ function filterText(input: string): boolean {
 }
 
 /**
+ * Check if the server is posting a leave and join message.
+ * @param input Raw text.
+ */
+function checkIfJoiningOrLeaving(input: string): void {
+
+  let playerName = input;
+  for (let i = 0; i < 3; i++) {
+    playerName = playerName.substring(playerName.indexOf(" ") + 1);
+  }
+  playerName = playerName.trim().substring(0, playerName.indexOf(" ")).trim();
+
+
+  let joinCheck = input;
+  for (let i = 0; i < 5; i++) {
+    joinCheck = joinCheck.substring(joinCheck.indexOf(" ") + 1);
+  }
+  joinCheck = joinCheck.trim().substring(0, joinCheck.indexOf(" ")).trim();
+  if (joinCheck === "joins") {
+    info("adding player button for " + playerName);
+    addPlayerButton(playerName);
+    return;
+  }
+
+
+  let leavesCheck = input;
+  info(leavesCheck);
+  for (let i = 0; i < 4; i++) {
+    leavesCheck = leavesCheck.substring(leavesCheck.indexOf(" ") + 1);
+  }
+  leavesCheck = leavesCheck.trim().substring(0, leavesCheck.indexOf(" ")).trim();
+  info(leavesCheck);
+  if (leavesCheck === "leaves") {
+    info("removing player button for " + playerName);
+    removePlayerButton(playerName);
+  }
+}
+
+/**
  * Append text to the environmental text log box thing.
  * @param newText The new text to append.
  */
@@ -213,6 +251,8 @@ export function environmentTextAppend(newText: string): void {
   if (filterText(newText)) {
     return;
   }
+
+  checkIfJoiningOrLeaving(newText);
 
   let textArea = safeGetElementByID("environment-text") as HTMLTextAreaElement;
   textArea.value += newText.substring(newText.indexOf(" "), newText.length);
