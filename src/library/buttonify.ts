@@ -15,6 +15,8 @@ export enum Tabs {
   environment, controls, health
 }
 
+const playerButtonListeners: Map<string, () => void> = new Map();
+
 /**
  * 
  * @param tab The Tabs enum.
@@ -338,10 +340,14 @@ function addPlayerButton(name: string): void {
   // This is neat.
   // Add the player's name into the command box when you click it.
   // Useful for complex player names.
-  playerButton.addEventListener("click", () => {
+  // Written like this for garbage collection.
+  let listener = () => {
     let commandBox = safeGetElementByID("command-box") as HTMLInputElement;
     commandBox.value += name;
-  });
+  };
+  playerButton.addEventListener("click", listener);
+
+  playerButtonListeners.set(name, listener);
 
   players.appendChild(playerButton);
 }
@@ -352,6 +358,7 @@ function addPlayerButton(name: string): void {
  */
 function removePlayerButton(name: string): void {
   document.getElementById(`${name}-button`)?.remove();
+  playerButtonListeners.delete(name);
 }
 
 /**
