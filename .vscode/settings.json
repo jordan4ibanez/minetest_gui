@@ -1,6 +1,7 @@
 {
   "typescript.format.semicolons": "insert",
   "cSpell.words": [
+    "aarch",
     "APPCONFIG",
     "APPDATA",
     "Avenir",
@@ -11,6 +12,7 @@
     "controllerify",
     "controlscontent",
     "Deno",
+    "dtolnay",
     "environmentcontent",
     "environmentlabel",
     "environmenttext",
@@ -30,7 +32,9 @@
     "killall",
     "labelz",
     "lableator",
+    "libappindicator",
     "librsvg",
+    "libwebkit",
     "lightgray",
     "logulate",
     "Maximizable",
@@ -40,6 +44,7 @@
     "minetestserver",
     "Minimizable",
     "mycooltodolist",
+    "patchelf",
     "playerbuttons",
     "playerlabel",
     "playerlist",
@@ -61,6 +66,7 @@
     "unmaximize",
     "unminimize",
     "vite",
+    "webkitgtk",
     "windowize",
     "worldlabel",
     "worldname"
