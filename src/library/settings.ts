@@ -1,5 +1,5 @@
 import { BaseDirectory, exists, readTextFile, writeTextFile } from "@tauri-apps/api/fs";
-import { info } from "tauri-plugin-log-api";
+// import { info } from "tauri-plugin-log-api";
 import { Tabs, updateServerRuntimeSettings } from ".";
 
 const settingFileName: string = "settings.conf";
@@ -112,15 +112,15 @@ export async function loadSettings(): Promise<Settingly> {
       if (checkReflect(thing)) {
         return thing as Settingly;
       } else {
-        info("Looks like you might have modified the save file and if you didn't, uh oh.");
+        // info("Looks like you might have modified the save file and if you didn't, uh oh.");
         return new Settingly();
       }
     } else {
-      info("failed completely");
+      // info("failed completely");
       return new Settingly();
     }
   } catch (e: any) {
-    info(e);
+    // info(e);
     return new Settingly();
   }
 }
@@ -129,6 +129,6 @@ export async function loadSettings(): Promise<Settingly> {
  * Save the settings file.
  */
 export async function saveSettings(): Promise<void> {
-  info("saved");
+  // info("saved");
   await writeTextFile(settingFileName, JSON.stringify(settings), dirInfo);
 }

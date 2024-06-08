@@ -55,7 +55,7 @@ let memoryGraph: Chart<"line", number[], number> = new Chart(memorychartcanvas, 
     },
     color: "white",
     animation: false,
-    maintainAspectRatio: true,
+    maintainAspectRatio: false,
     responsive: true,
     // onResize: (chart) => {
     //   chart.resize();

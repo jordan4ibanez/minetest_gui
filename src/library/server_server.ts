@@ -1,6 +1,6 @@
 import { Child, Command } from "@tauri-apps/api/shell";
 import { environmentTextAppend, selectTab, Settings, Tabs } from ".";
-import { info } from "tauri-plugin-log-api";
+// import { info } from "tauri-plugin-log-api";
 
 const bash: string = "bash";
 
@@ -51,7 +51,7 @@ async function checkGodMode(): Promise<void> {
   const exists = (await testing.execute()).stdout.trim();
   if (exists === "false") {
     // Blindly make the file with bash.
-    info("generating blank minetest.conf");
+    // info("generating blank minetest.conf");
     const execution = new Command(bash, [bashTrigger, `echo "" > ${path}`]);
     await execution.execute();
   }
@@ -62,7 +62,7 @@ async function checkGodMode(): Promise<void> {
     // If the server admin messes with this, that's their problem.
     if (line.replace(/\s/g, '').substring(0, 5) === "name=") {
       // if we already have it we can stop here.
-      info("found god mode, skipping.");
+      // info("found god mode, skipping.");
       return;
     }
   }
@@ -109,7 +109,7 @@ export async function startServer(): Promise<void> {
   });
 
   command.addListener("close", () => {
-    info("SERVER HAS CLOSED.");
+    // info("SERVER HAS CLOSED.");
     command = null;
     process = null;
   });
