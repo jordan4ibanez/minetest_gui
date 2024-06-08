@@ -31,6 +31,7 @@ async function onStep(): Promise<void> {
   const delta = tickTimeInSeconds;
   await memoryPollLogic(delta);
   await restartWatch(delta);
+  // spamTest();
 }
 
 // Internal timer runs main at 20 FPS.
