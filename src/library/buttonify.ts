@@ -1,5 +1,5 @@
 import { error, info } from "tauri-plugin-log-api";
-import { messageServer, Settings, startServer } from ".";
+import { killAllServers, messageServer, Settings, startServer, triggerRestartWatch } from ".";
 import { open } from "@tauri-apps/api/dialog";
 
 // I guess this framework is called buttonify now.
@@ -210,12 +210,10 @@ export function removePlayer(name: string): void {
 
 }
 
-
 /**
  * Dump the saved settings into the controls settings thing.
  */
 export function buttonSettingsApply(): void {
-  (safeGetElementByID("ip") as HTMLInputElement).value = Settings.getIP();
   (safeGetElementByID("port") as HTMLInputElement).value = Settings.getPort();
   (safeGetElementByID("game") as HTMLInputElement).value = Settings.getGame();
   (safeGetElementByID("world") as HTMLInputElement).value = Settings.getWorld();
@@ -223,12 +221,7 @@ export function buttonSettingsApply(): void {
   (safeGetElementByID("conf") as HTMLInputElement).value = Settings.getConf();
 }
 
-
 //? Hyper autosave.
-safeAddEventListenerByID("ip", "input", () => {
-  const ipBox = safeGetElementByID("ip") as HTMLInputElement;
-  Settings.setIP(ipBox.value);
-});
 safeAddEventListenerByID("port", "input", () => {
   const portBox = safeGetElementByID("port") as HTMLInputElement;
   Settings.setPort(portBox.value);
@@ -254,10 +247,18 @@ safeAddEventListenerByID("startserverbutton", "click", async () => {
   await startServer();
 });
 
-safeAddEventListenerByID("stopserverbutton", "click", async () => {
+safeAddEventListenerByID("stopserverbutton", "click", () => {
   messageServer("/shutdown");
 });
 
+safeAddEventListenerByID("restartserverbutton", "click", () => {
+  messageServer("/shutdown");
+  triggerRestartWatch();
+});
+
+safeAddEventListenerByID("killall", "click", async () => {
+  await killAllServers();
+});
 
 
 safeAddEventListenerByID("findexebutton", "click", async () => {
