@@ -1,6 +1,6 @@
 [package]
 name = "minetest_gui"
-version = "1.0.4"
+version = "1.0.1"
 description = "A gui for minetest. Uses tauri and typescript."
 authors = ["jordan4ibanez", "siliconsniffer"]
 edition = "2021"
@@ -11,7 +11,10 @@ edition = "2021"
 tauri-build = { version = "1.5.2", features = [] }
 
 [dependencies]
-tauri = { version = "1.6.7", features = [ "window-all", "shell-all", "dialog-open",
+tauri = { version = "1.6.7", features = [
+  "window-all",
+  "shell-all",
+  "dialog-open",
   "fs-all",
   "path-all",
   "http-all",
